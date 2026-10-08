@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Centum Capital</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root{
+    --bg: #F4F5F7;
+    --surface: #FFFFFF;
+    --surface-2: #ECEEF3;
+    --ink: #0F1B2E;
+    --muted: #5B6577;
+    --line: #DCDFE6;
+    --gold: #96762C;
+    --gold-strong: #7C6224;
+    --gold-bg: #F4EEDD;
+    --navy-deep: #0B1220;
+    --shadow: 0 1px 2px rgba(15,27,46,.05), 0 8px 24px rgba(15,27,46,.06);
+    --stack-debt: #16233C;
+    --stack-bridge: #3C5177;
+    --stack-pref: #96762C;
+    --stack-equity: #C9A94A;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #0A1120;
+      --surface: #101A2C;
+      --surface-2: #16223A;
+      --ink: #ECEEF4;
+      --muted: #97A1B6;
+      --line: #26324B;
+      --gold: #D3B45F;
+      --gold-strong: #E4C877;
+      --gold-bg: #241E10;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 32px rgba(0,0,0,.35);
+      --stack-debt: #1B2A47;
+      --stack-bridge: #3C5177;
+      --stack-pref: #8E7134;
+      --stack-equity: #D3B45F;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #0A1120;
+    --surface: #101A2C;
+    --surface-2: #16223A;
+    --ink: #ECEEF4;
+    --muted: #97A1B6;
+    --line: #26324B;
+    --gold: #D3B45F;
+    --gold-strong: #E4C877;
+    --gold-bg: #241E10;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 32px rgba(0,0,0,.35);
+    --stack-debt: #1B2A47;
+    --stack-bridge: #3C5177;
+    --stack-pref: #8E7134;
+    --stack-equity: #D3B45F;
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Public Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  h1,h2,h3,h4{
+    font-family:'Fraunces', ui-serif, Georgia, serif;
+    font-weight:500;
+    line-height:1.12;
+    text-wrap:balance;
+    margin:0;
+    color:var(--ink);
+  }
+  .mono{
+    font-family:'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', ui-monospace, monospace;
+    font-size:.72rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:500;
+  }
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+  section{padding:88px 0;}
+  @media (max-width:720px){ section{padding:56px 0;} .wrap{padding:0 20px;} }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 0;
+  }
+  .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; }
+  .brand-mark{ width:34px; height:34px; flex:none; }
+  .brand-word{
+    font-family:'Fraunces', serif;
+    font-size:1.18rem;
+    letter-spacing:.02em;
+    color:var(--ink);
+    font-weight:500;
+  }
+  .brand-word b{ color:var(--gold); font-weight:600; }
+  nav.primary{ display:flex; align-items:center; gap:30px; }
+  nav.primary a{
+    font-size:.92rem; text-decoration:none; color:var(--muted);
+    transition:color .15s ease;
+  }
+  nav.primary a:hover{ color:var(--ink); }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:11px 20px; border-radius:3px;
+    font-size:.88rem; font-weight:600; text-decoration:none;
+    border:1px solid transparent; cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+    font-family:'Public Sans', sans-serif;
+  }
+  .btn:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+  .btn-gold{ background:var(--gold); color:#fff; }
+  .btn-gold:hover{ background:var(--gold-strong); }
+  .btn-line{ border-color:var(--line); color:var(--ink); background:transparent; }
+  .btn-line:hover{ border-color:var(--gold); color:var(--gold); }
+  .btn-invert{ background:var(--ink); color:var(--bg); }
+  .btn-invert:hover{ transform:translateY(-1px); }
+
+  .menu-toggle{ display:none; background:none; border:1px solid var(--line); border-radius:3px; width:40px; height:40px; align-items:center; justify-content:center; }
+  .menu-toggle svg{ width:18px; height:18px; }
+
+  @media (max-width:860px){
+    nav.primary{
+      position:fixed; inset:65px 0 0 0; background:var(--bg);
+      flex-direction:column; align-items:flex-start; padding:24px 20px; gap:4px;
+      transform:translateX(100%); transition:transform .25s ease; overflow-y:auto;
+    }
+    nav.primary.open{ transform:translateX(0); }
+    nav.primary a{ width:100%; padding:14px 6px; border-bottom:1px solid var(--line); font-size:1rem; color:var(--ink); }
+    nav.primary .btn{ margin-top:14px; width:100%; justify-content:center; }
+    .menu-toggle{ display:flex; }
+    .header-cta{ display:none; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding:76px 0 60px; }
+  .hero-grid{
+    display:grid; grid-template-columns:1.15fr .85fr; gap:64px; align-items:center;
+  }
+  @media (max-width:940px){ .hero-grid{ grid-template-columns:1fr; gap:48px; } }
+  .hero h1{ font-size:clamp(2.3rem, 4.4vw, 3.4rem); letter-spacing:-.01em; }
+  .hero h1 em{ font-style:italic; color:var(--gold); }
+  .hero p.lede{
+    margin-top:22px; max-width:46ch; color:var(--muted); font-size:1.08rem;
+  }
+  .hero-actions{ display:flex; gap:14px; margin-top:32px; flex-wrap:wrap; }
+  .hero-tags{ display:flex; gap:10px 22px; flex-wrap:wrap; margin-top:38px; padding-top:26px; border-top:1px solid var(--line); }
+  .hero-tag{ font-size:.78rem; color:var(--muted); display:flex; align-items:center; gap:8px; }
+  .hero-tag .dot{ width:5px; height:5px; border-radius:50%; background:var(--gold); }
+
+  /* Capital stack visual */
+  .stack-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:6px;
+    box-shadow:var(--shadow); padding:22px 22px 18px;
+  }
+  .stack-card-head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:16px; }
+  .stack-card-head .t{ font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); font-family:'IBM Plex Mono',monospace; }
+  .stack-card-head .n{ font-size:.72rem; color:var(--muted); font-family:'IBM Plex Mono',monospace; }
+  .stack{
+    display:flex; flex-direction:column; border-radius:4px; overflow:hidden; height:230px;
+  }
+  .stack-seg{
+    display:flex; align-items:center; justify-content:space-between; padding:0 16px;
+    color:#fff; font-size:.82rem;
+  }
+  .stack-seg .name{ font-weight:600; }
+  .stack-seg .pct{ font-family:'IBM Plex Mono',monospace; font-size:.86rem; }
+  .stack-legend{ margin-top:16px; display:flex; flex-direction:column; gap:8px; }
+  .stack-legend-row{ display:flex; justify-content:space-between; font-size:.78rem; color:var(--muted); font-family:'IBM Plex Mono',monospace; }
+  .stack-note{ margin-top:16px; font-size:.76rem; color:var(--muted); border-top:1px solid var(--line); padding-top:14px; }
+
+  /* ---------- Section headers ---------- */
+  .section-head{ max-width:640px; margin-bottom:44px; }
+  .section-head h2{ font-size:clamp(1.7rem, 2.6vw, 2.3rem); margin-top:10px; }
+  .section-head p{ color:var(--muted); margin-top:14px; font-size:1rem; }
+
+  /* ---------- Capital solutions ledger ---------- */
+  .ledger{ border-top:1px solid var(--line); }
+  .ledger-row{
+    display:grid; grid-template-columns:1.3fr 1.7fr .9fr .8fr; gap:24px;
+    padding:22px 0; border-bottom:1px solid var(--line);
+    align-items:center;
+  }
+  .ledger-row.head{
+    font-family:'IBM Plex Mono',monospace; font-size:.7rem; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--muted); padding:14px 0;
+  }
+  .ledger-row .prog{ display:flex; flex-direction:column; gap:4px; }
+  .ledger-row .prog .name{ font-family:'Fraunces',serif; font-size:1.08rem; font-weight:500; }
+  .ledger-row .prog .code{ font-family:'IBM Plex Mono',monospace; font-size:.7rem; color:var(--gold); }
+  .ledger-row .use{ color:var(--muted); font-size:.92rem; }
+  .ledger-row .figure{ font-family:'IBM Plex Mono',monospace; font-size:.86rem; color:var(--ink); }
+  .ledger-row .figure .k{ display:block; font-size:.66rem; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:3px; font-family:'Public Sans',sans-serif; }
+  @media (max-width:760px){
+    .ledger-row{ grid-template-columns:1fr; gap:8px; }
+    .ledger-row.head{ display:none; }
+    .ledger-row{ padding:20px 0; }
+  }
+
+  /* ---------- Sectors ---------- */
+  .sectors-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:6px; overflow:hidden; }
+  @media (max-width:860px){ .sectors-grid{ grid-template-columns:1fr; } }
+  .sector-card{ background:var(--surface); padding:32px 28px; display:flex; flex-direction:column; gap:14px; }
+  .sector-card .icon{ width:38px; height:38px; }
+  .sector-card h3{ font-size:1.15rem; }
+  .sector-card p{ color:var(--muted); font-size:.92rem; margin:0; }
+  .sector-card .tag{ font-family:'IBM Plex Mono',monospace; font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gold); }
+
+  .partner-band{
+    margin-top:1px; background:var(--surface); border:1px solid var(--line); border-top:none; border-radius:0 0 6px 6px;
+    padding:26px 28px; display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;
+  }
+  .partner-band .l{ font-size:.94rem; }
+  .partner-band .l b{ font-family:'Fraunces',serif; font-weight:500; }
+  .partner-band .l span{ color:var(--muted); }
+
+  /* ---------- Sourcing CTA band ---------- */
+  .sourcing{
+    background:var(--navy-deep); color:#EDEFF4; border-radius:8px;
+    padding:56px 48px; display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:center;
+  }
+  @media (max-width:860px){ .sourcing{ grid-template-columns:1fr; padding:40px 26px; } }
+  .sourcing .eyebrow{ color:var(--gold-strong, var(--gold)); }
+  .sourcing h2{ color:#F4F5F7; font-size:clamp(1.6rem,3vw,2.15rem); margin-top:10px; }
+  .sourcing p{ color:#AEB6C6; margin-top:16px; max-width:52ch; }
+  .sourcing-points{ display:flex; flex-direction:column; gap:18px; }
+  .sourcing-point{ display:flex; gap:14px; align-items:flex-start; }
+  .sourcing-point .num{ font-family:'IBM Plex Mono',monospace; color:var(--gold-strong,var(--gold)); font-size:.78rem; padding-top:3px; }
+  .sourcing-point .t{ font-size:.92rem; color:#D7DCE6; }
+  .sourcing-point .t b{ color:#fff; display:block; margin-bottom:3px; font-family:'Fraunces',serif; font-weight:500; font-size:1rem; }
+  .sourcing-actions{ margin-top:28px; display:flex; gap:14px; flex-wrap:wrap; }
+
+  /* ---------- Process ---------- */
+  .process{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:1px solid var(--line); border-left:1px solid var(--line); }
+  @media (max-width:860px){ .process{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:520px){ .process{ grid-template-columns:1fr; } }
+  .process-step{ padding:28px 26px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .process-step .idx{ font-family:'IBM Plex Mono',monospace; color:var(--gold); font-size:.78rem; }
+  .process-step h3{ font-size:1.05rem; margin-top:14px; }
+  .process-step p{ color:var(--muted); font-size:.88rem; margin-top:8px; }
+
+  /* ---------- Why / principles ---------- */
+  .principles{ display:grid; grid-template-columns:repeat(3,1fr); gap:36px; }
+  @media (max-width:760px){ .principles{ grid-template-columns:1fr; } }
+  .principle .mark{ font-family:'Fraunces',serif; font-size:1.6rem; color:var(--gold); }
+  .principle h3{ font-size:1.08rem; margin-top:10px; }
+  .principle p{ color:var(--muted); font-size:.92rem; margin-top:8px; }
+
+  /* ---------- Contact / footer ---------- */
+  .contact{ background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:52px; display:grid; grid-template-columns:1fr 1fr; gap:48px; }
+  @media (max-width:760px){ .contact{ grid-template-columns:1fr; padding:32px 24px; } }
+  .contact h2{ font-size:1.9rem; }
+  .contact p{ color:var(--muted); margin-top:14px; max-width:42ch; }
+  .contact-lines{ display:flex; flex-direction:column; gap:18px; }
+  .contact-line{ display:flex; justify-content:space-between; border-bottom:1px solid var(--line); padding-bottom:14px; }
+  .contact-line .k{ font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-family:'IBM Plex Mono',monospace; }
+  .contact-line .v{ font-family:'Fraunces',serif; font-size:1.05rem; }
+  .contact-line .v a{ text-decoration:none; }
+  .contact-line .v a:hover{ color:var(--gold); }
+
+  footer{ border-top:1px solid var(--line); padding:36px 0; margin-top:20px; }
+  .footer-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; }
+  .footer-row .f-brand{ display:flex; align-items:center; gap:10px; }
+  .footer-row .f-brand span{ font-family:'Fraunces',serif; font-size:.95rem; }
+  .footer-links{ display:flex; gap:22px; font-size:.82rem; color:var(--muted); }
+  .footer-links a{ text-decoration:none; }
+  .footer-links a:hover{ color:var(--gold); }
+  .footer-disclosure{ margin-top:22px; font-size:.74rem; color:var(--muted); max-width:74ch; line-height:1.6; }
+
+  /* ---------- Track record bar ---------- */
+  .track-bar{
+    border-bottom:1px solid var(--line);
+    background:var(--surface-2);
+  }
+  .track-bar .wrap{
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    padding:11px 28px; flex-wrap:wrap; text-align:center;
+  }
+  .track-bar .fig{
+    font-family:'IBM Plex Mono',monospace; font-variant-numeric:tabular-nums;
+    color:var(--gold); font-weight:500; font-size:.86rem;
+  }
+  .track-bar .lbl{ font-size:.86rem; color:var(--muted); }
+
+  /* ---------- Opportunities ---------- */
+  .opps-empty{
+    border:1px dashed var(--line); border-radius:6px;
+    padding:40px 36px; display:flex; flex-direction:column; gap:14px;
+    align-items:flex-start; background:var(--surface);
+  }
+  .opps-empty h3{ font-size:1.15rem; }
+  .opps-empty p{ color:var(--muted); font-size:.94rem; max-width:56ch; margin:0; }
+  .opps-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:24px; }
+  @media (max-width:860px){ .opps-grid{ grid-template-columns:1fr; } }
+  .opp-card{
+    border:1px solid var(--line); border-radius:6px; background:var(--surface);
+    padding:26px 24px; display:flex; flex-direction:column; gap:12px;
+  }
+  .opp-card .tag{ font-family:'IBM Plex Mono',monospace; font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gold); }
+  .opp-card h3{ font-size:1.1rem; }
+  .opp-card .loc{ color:var(--muted); font-size:.86rem; }
+  .opp-card .figs{ display:flex; gap:18px; margin-top:4px; }
+  .opp-card .figs div{ font-family:'IBM Plex Mono',monospace; font-size:.82rem; }
+  .opp-card .figs .k{ display:block; font-size:.64rem; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-family:'Public Sans',sans-serif; margin-bottom:2px; }
+  .opp-card .btn{ margin-top:8px; align-self:flex-start; }
+
+  [data-reveal]{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion: no-preference){
+    [data-reveal]{ opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease; }
+    [data-reveal].in{ opacity:1; transform:none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-row">
+    <a class="brand" href="#top">
+      <svg class="brand-mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Centum Capital mark">
+        <defs>
+          <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#E4C877"/>
+            <stop offset="1" stop-color="#96762C"/>
+          </linearGradient>
+          <linearGradient id="silverGrad" x1="1" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#F2F3F6"/>
+            <stop offset="1" stop-color="#96A0B2"/>
+          </linearGradient>
+        </defs>
+        <polygon points="50,8 50,60 12,92 38,92" fill="url(#goldGrad)"/>
+        <polygon points="50,8 50,60 88,92 62,92" fill="url(#silverGrad)"/>
+        <polygon points="50,8 50,60 62,92 38,92" fill="#0F1B2E"/>
+      </svg>
+      <span class="brand-word">CENTUM <b>CAPITAL</b></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <nav class="primary" id="primaryNav">
+      <a href="#solutions">Capital Solutions</a>
+      <a href="#sectors">Sectors</a>
+      <a href="#opportunities">Opportunities</a>
+      <a href="#sourcing">Sellers</a>
+      <a href="#process">Process</a>
+      <a href="#contact" class="btn btn-gold header-cta">Start a Conversation</a>
+    </nav>
+  </div>
+</header>
+
+<div class="track-bar">
+  <div class="wrap">
+    <span class="fig">$135M+</span>
+    <span class="lbl">in debt &amp; equity closed in 2025</span>
+  </div>
+</div>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div data-reveal>
+        <p class="eyebrow">Commercial Real Estate &nbsp;&middot;&nbsp; Debt &amp; Equity</p>
+        <h1>Capital, structured for <em>the deal</em> in front of you.</h1>
+        <p class="lede">Centum Capital arranges debt and equity across the full stack &mdash; SBA, lines of credit, bridge, CMBS, and agency (Fannie Mae / Freddie Mac) &mdash; then structures it around how a specific acquisition, refinance, or sale-leaseback actually needs to close.</p>
+        <div class="hero-actions">
+          <a class="btn btn-gold" href="#solutions">Explore Capital Solutions</a>
+          <a class="btn btn-line" href="#sourcing">We're Sourcing Sellers</a>
+        </div>
+        <div class="hero-tags">
+          <span class="hero-tag"><span class="dot"></span>SBA 7(a) / 504</span>
+          <span class="hero-tag"><span class="dot"></span>Bridge &amp; CMBS</span>
+          <span class="hero-tag"><span class="dot"></span>Fannie Mae / Freddie Mac</span>
+          <span class="hero-tag"><span class="dot"></span>REIT Equity Partnerships</span>
+        </div>
+      </div>
+
+      <div data-reveal>
+        <div class="stack-card">
+          <div class="stack-card-head">
+            <span class="t">Sample Capital Stack</span>
+            <span class="n">Illustrative &mdash; CRE Acquisition</span>
+          </div>
+          <div class="stack">
+            <div class="stack-seg" style="background:var(--stack-equity); flex:10; color:#241E10;">
+              <span class="name">Sponsor Equity</span><span class="pct">10%</span>
+            </div>
+            <div class="stack-seg" style="background:var(--stack-pref); flex:15;">
+              <span class="name">Preferred Equity</span><span class="pct">15%</span>
+            </div>
+            <div class="stack-seg" style="background:var(--stack-bridge); flex:15;">
+              <span class="name">Bridge / Mezzanine</span><span class="pct">15%</span>
+            </div>
+            <div class="stack-seg" style="background:var(--stack-debt); flex:60;">
+              <span class="name">Senior Debt</span><span class="pct">60%</span>
+            </div>
+          </div>
+          <div class="stack-note">Every position is sourced and negotiated in-house &mdash; sponsor equity and preferred capital included &mdash; rather than assembled from a single lender's rate sheet.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPITAL SOLUTIONS -->
+  <section id="solutions">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Capital Solutions</p>
+        <h2>One desk, the whole stack.</h2>
+        <p>We place each program with the lenders and capital partners who actually compete for that risk &mdash; so the structure fits the asset, not the other way around.</p>
+      </div>
+
+      <div class="ledger" data-reveal>
+        <div class="ledger-row head">
+          <div>Program</div><div>Use Case</div><div>Typical Advance</div><div>Term</div>
+        </div>
+        <div class="ledger-row">
+          <div class="prog"><span class="name">SBA 7(a) / 504</span><span class="code">SBA</span></div>
+          <div class="use">Owner-occupied CRE, practice &amp; business acquisitions</div>
+          <div class="figure"><span class="k">Advance</span>up to 90%</div>
+          <div class="figure"><span class="k">Term</span>10&ndash;25 yr</div>
+        </div>
+        <div class="ledger-row">
+          <div class="prog"><span class="name">Line of Credit</span><span class="code">LOC</span></div>
+          <div class="use">Working capital, portfolio &amp; operating liquidity</div>
+          <div class="figure"><span class="k">Advance</span>Revolving</div>
+          <div class="figure"><span class="k">Term</span>12&ndash;36 mo</div>
+        </div>
+        <div class="ledger-row">
+          <div class="prog"><span class="name">Merchant Cash Advance</span><span class="code">MCA</span></div>
+          <div class="use">Same-day capital secured against future receivables</div>
+          <div class="figure"><span class="k">Advance</span>vs. revenue</div>
+          <div class="figure"><span class="k">Term</span>3&ndash;18 mo</div>
+        </div>
+        <div class="ledger-row">
+          <div class="prog"><span class="name">Bridge Loan</span><span class="code">BRIDGE</span></div>
+          <div class="use">Value-add, lease-up, or time-sensitive closings</div>
+          <div class="figure"><span class="k">Advance</span>up to 75% LTC</div>
+          <div class="figure"><span class="k">Term</span>12&ndash;36 mo, IO</div>
+        </div>
+        <div class="ledger-row">
+          <div class="prog"><span class="name">CMBS</span><span class="code">CONDUIT</span></div>
+          <div class="use">Stabilized income property, non-recourse execution</div>
+          <div class="figure"><span class="k">Advance</span>up to 75% LTV</div>
+          <div class="figure"><span class="k">Term</span>5 / 7 / 10 yr fixed</div>
+        </div>
+        <div class="ledger-row">
+          <div class="prog"><span class="name">Fannie Mae / Freddie Mac</span><span class="code">AGENCY</span></div>
+          <div class="use">Multifamily acquisition, refinance &amp; supplemental</div>
+          <div class="figure"><span class="k">Advance</span>up to 80% LTV</div>
+          <div class="figure"><span class="k">Term</span>5&ndash;30 yr</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTORS -->
+  <section id="sectors">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Sectors &amp; Asset Classes</p>
+        <h2>Where the desk specializes.</h2>
+        <p>Concentrated expertise in single-tenant net lease sale-leasebacks and industrial real estate, alongside institutional equity partnerships.</p>
+      </div>
+
+      <div data-reveal>
+        <div class="sectors-grid">
+          <div class="sector-card">
+            <span class="tag">Sale-Leaseback</span>
+            <h3>Dental Practices</h3>
+            <p>Unlock the real estate equity built up under the practice while retaining full operational control through a long-term lease-back.</p>
+          </div>
+          <div class="sector-card">
+            <span class="tag">Sale-Leaseback</span>
+            <h3>Veterinary Hospitals</h3>
+            <p>Monetize owned clinic real estate to fund expansion, buy-outs, or de-novo growth without disrupting the practice.</p>
+          </div>
+          <div class="sector-card">
+            <span class="tag">Sale-Leaseback</span>
+            <h3>Medical Spas</h3>
+            <p>Recapitalize single- and multi-location medispa real estate at institutional pricing, structured around your lease terms.</p>
+          </div>
+        </div>
+        <div class="partner-band">
+          <div class="l"><b>Industrial Assets</b> &mdash; <span>bridge-to-perm, build-to-suit, and owner-user sale-leaseback financing across warehouse, flex, and manufacturing.</span></div>
+          <div class="l"><b>REIT Partnerships</b> &mdash; <span>joint-venture equity and portfolio-level debt placement for institutional sponsors.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFF-MARKET OPPORTUNITIES -->
+  <section id="opportunities">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">For Buyers &amp; Investors</p>
+        <h2>Off-market opportunities, under NCNDA.</h2>
+        <p>Every asset we bring to market is sourced directly from ownership. Full details &mdash; address, financials, and seller terms &mdash; are released only to qualified buyers who've signed a non-circumvention, non-disclosure agreement.</p>
+      </div>
+      <div class="opps-empty" data-reveal>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gold);">Current Status</span>
+        <h3>No opportunities are posted publicly right now.</h3>
+        <p>Active off-market listings are shared directly with our qualified buyer list under NCNDA as they clear for release &mdash; they aren't posted here in advance. Ask to be added to the distribution list and we'll reach out as soon as something fits your criteria.</p>
+        <a class="btn btn-gold" href="mailto:deals@centumcapital.com?subject=Add%20me%20to%20the%20off-market%20distribution%20list">Request to Be Added</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOURCING / SELLERS -->
+  <section id="sourcing">
+    <div class="wrap">
+      <div class="sourcing" data-reveal>
+        <div>
+          <p class="eyebrow">Acquisitions</p>
+          <h2>We're buying &mdash; and we structure creatively.</h2>
+          <p>Centum Capital sources single-tenant net lease and industrial properties directly from owners and brokers. When an all-cash offer isn't the right fit, we build the deal around what a seller actually needs.</p>
+          <div class="sourcing-actions">
+            <a class="btn btn-invert" href="#contact">Submit a Property</a>
+            <a class="btn btn-line" style="border-color:#3C4863; color:#EDEFF4;" href="#contact">Talk to Acquisitions</a>
+          </div>
+        </div>
+        <div class="sourcing-points">
+          <div class="sourcing-point">
+            <span class="num">01</span>
+            <span class="t"><b>Sale-Leasebacks</b>Sell the real estate, keep operating from it on terms you help set.</span>
+          </div>
+          <div class="sourcing-point">
+            <span class="num">02</span>
+            <span class="t"><b>Seller Financing</b>Carry a note, take a preferred position, or structure an earn-out.</span>
+          </div>
+          <div class="sourcing-point">
+            <span class="num">03</span>
+            <span class="t"><b>1031 &amp; Off-Market</b>Direct, confidential outreach for owners not actively listing.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">How It Moves</p>
+        <h2>From first call to funding.</h2>
+      </div>
+      <div class="process" data-reveal>
+        <div class="process-step">
+          <span class="idx">01</span>
+          <h3>Introductory Call</h3>
+          <p>We review the asset, the timeline, and what "creative" needs to mean for this deal.</p>
+        </div>
+        <div class="process-step">
+          <span class="idx">02</span>
+          <h3>Underwriting &amp; Structuring</h3>
+          <p>We build the capital stack &mdash; debt, mezzanine, and equity &mdash; around your constraints.</p>
+        </div>
+        <div class="process-step">
+          <span class="idx">03</span>
+          <h3>Term Sheet &amp; Matching</h3>
+          <p>Competing terms from lenders and capital partners suited to the specific risk.</p>
+        </div>
+        <div class="process-step">
+          <span class="idx">04</span>
+          <h3>Close &amp; Fund</h3>
+          <p>We stay at the table through closing, coordinating every party in the stack.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRINCIPLES -->
+  <section>
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Why Centum</p>
+        <h2>A brokerage built around structure, not a single product.</h2>
+      </div>
+      <div class="principles" data-reveal>
+        <div class="principle">
+          <span class="mark">&sect;1</span>
+          <h3>Program-agnostic</h3>
+          <p>We're not a bank with one box to fit you into &mdash; we place each deal with whoever actually competes for it.</p>
+        </div>
+        <div class="principle">
+          <span class="mark">&sect;2</span>
+          <h3>Both sides of the stack</h3>
+          <p>Debt and equity, sourced and negotiated together, so the structure is coherent &mdash; not stapled from two conversations.</p>
+        </div>
+        <div class="principle">
+          <span class="mark">&sect;3</span>
+          <h3>Sector depth</h3>
+          <p>Concentrated experience in practice-real-estate sale-leasebacks and industrial assets, not generalist coverage.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact" data-reveal>
+        <div>
+          <p class="eyebrow">Start a Conversation</p>
+          <h2>Bring us the deal &mdash; we'll bring the structure.</h2>
+          <p>Whether you're financing an acquisition, monetizing owned real estate, or selling an asset, tell us where things stand and we'll respond with next steps.</p>
+          <div style="margin-top:24px; padding-top:22px; border-top:1px solid var(--line);">
+            <p style="margin:0 0 12px; font-size:.86rem; color:var(--muted);">Already working with us on a deal?</p>
+            <a class="btn btn-line" id="doc-upload-link" href="mailto:deals@centumcapital.com?subject=Financial%20Documents">Send Financial Documents</a>
+          </div>
+        </div>
+        <div class="contact-lines">
+          <div class="contact-line"><span class="k">Deal Desk</span><span class="v"><a href="mailto:deals@centumcapital.com">deals@centumcapital.com</a></span></div>
+          <div class="contact-line"><span class="k">Acquisitions</span><span class="v"><a href="mailto:acquisitions@centumcapital.com">acquisitions@centumcapital.com</a></span></div>
+          <div class="contact-line"><span class="k">Direct Line</span><span class="v"><a href="tel:+12125550100">(212) 555-0100</a></span></div>
+          <div class="contact-line"><span class="k">Office</span><span class="v">New York, NY</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-row">
+      <div class="f-brand">
+        <svg width="20" height="20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <polygon points="50,8 50,60 12,92 38,92" fill="url(#goldGrad)"/>
+          <polygon points="50,8 50,60 88,92 62,92" fill="url(#silverGrad)"/>
+          <polygon points="50,8 50,60 62,92 38,92" fill="#0F1B2E"/>
+        </svg>
+        <span>Centum Capital</span>
+      </div>
+      <div class="footer-links">
+        <a href="#solutions">Capital Solutions</a>
+        <a href="#sectors">Sectors</a>
+        <a href="#opportunities">Opportunities</a>
+        <a href="#sourcing">Sellers</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <p class="footer-disclosure">Centum Capital is a commercial real estate finance and acquisitions brokerage. Terms shown are illustrative and subject to underwriting, lender approval, and market conditions. Not a commitment to lend or purchase.</p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var toggle = document.getElementById('menuToggle');
+    var nav = document.getElementById('primaryNav');
+    toggle.addEventListener('click', function(){
+      var open = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    nav.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ nav.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); });
+    });
+
+    if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: .12 });
+      document.querySelectorAll('[data-reveal]').forEach(function(el){ io.observe(el); });
+    } else {
+      document.querySelectorAll('[data-reveal]').forEach(function(el){ el.classList.add('in'); });
+    }
+  })();
+</script>
+</body>
+</html>
