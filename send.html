@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Send Materials | Centum Capital</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .send-wrap{ max-width:880px; margin:0 auto; padding:56px 16px 72px; }
+  .send-wrap h1{ font-size:clamp(1.8rem,4vw,2.5rem); margin:6px 0 10px; }
+  .send-wrap .lede{ color:var(--muted); max-width:60ch; margin:0 0 28px; }
+  .send-card{ background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:26px; box-shadow:var(--shadow); margin-bottom:18px; }
+  .send-card h2{ font-size:1.15rem; margin:0 0 14px; }
+  .send-step{ display:inline-block; font:600 .72rem/1 var(--mono, ui-monospace, monospace); letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+  .send-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .send-field{ display:flex; flex-direction:column; gap:6px; }
+  .send-field label{ font-size:.82rem; color:var(--muted); }
+  .send-field input, .send-field textarea{ font:inherit; color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:11px 12px; width:100%; box-sizing:border-box; }
+  .send-field textarea{ min-height:230px; line-height:1.5; resize:vertical; }
+  .send-field input:focus, .send-field textarea:focus{ outline:2px solid var(--gold); outline-offset:1px; }
+  .file-list{ display:flex; flex-direction:column; gap:10px; }
+  .file-item{ display:flex; gap:12px; align-items:flex-start; padding:12px 14px; border:1px solid var(--line); border-radius:6px; background:var(--bg); }
+  .file-item input{ margin-top:4px; accent-color:var(--gold); }
+  .file-item b{ display:block; }
+  .file-item span{ color:var(--muted); font-size:.88rem; }
+  .file-item.off{ opacity:.55; }
+  .file-item .need{ color:var(--gold); font-size:.8rem; }
+  .send-actions{ display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+  .send-note{ color:var(--muted); font-size:.86rem; margin:14px 0 0; max-width:62ch; }
+  .send-ok{ color:var(--gold); font-size:.88rem; min-height:1.2em; margin-top:10px; }
+  details.how{ margin-top:4px; }
+  details.how summary{ cursor:pointer; font-weight:600; }
+  details.how ol{ color:var(--muted); font-size:.92rem; line-height:1.7; padding-left:20px; margin:12px 0 0; }
+  @media (max-width:640px){ .send-row{ grid-template-columns:1fr; } .send-card{ padding:20px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-row">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Centum Capital mark">
+        <defs>
+          <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E4C877"/><stop offset="1" stop-color="#96762C"/></linearGradient>
+          <linearGradient id="silverGrad" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2F3F6"/><stop offset="1" stop-color="#96A0B2"/></linearGradient>
+        </defs>
+        <polygon points="50,8 50,60 12,92 38,92" fill="url(#goldGrad)"/>
+        <polygon points="50,8 50,60 88,92 62,92" fill="url(#silverGrad)"/>
+        <polygon points="50,8 50,60 62,92 38,92" fill="#0F1B2E"/>
+      </svg>
+      <span class="brand-word">CENTUM <b>CAPITAL</b></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <nav class="primary" id="primaryNav">
+      <a href="index.html#solutions">Capital Solutions</a>
+      <a href="index.html#sectors">Sectors</a>
+      <a href="marketplace.html">Deal Board</a>
+      <a href="submit.html">Submit a Deal</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="send-wrap">
+    <p class="eyebrow">Team Tool</p>
+    <h1>Send materials to a client.</h1>
+    <p class="lede">Pick the files, enter who they are going to, and your email opens with the message and links already written. The files live in OneDrive, so nothing gets attached and nothing gets stuck in a size limit.</p>
+
+    <div class="send-card">
+      <span class="send-step">Step 1</span>
+      <h2>Who is it going to?</h2>
+      <div class="send-row">
+        <div class="send-field"><label for="to-name">First name</label><input id="to-name" type="text" autocomplete="off" placeholder="Jordan"></div>
+        <div class="send-field"><label for="to-email">Email address</label><input id="to-email" type="email" autocomplete="off" placeholder="jordan@company.com"></div>
+      </div>
+    </div>
+
+    <div class="send-card">
+      <span class="send-step">Step 2</span>
+      <h2>Which files?</h2>
+      <div class="file-list" id="file-list"></div>
+    </div>
+
+    <div class="send-card">
+      <span class="send-step">Step 3</span>
+      <h2>Check the message, then send.</h2>
+      <div class="send-field"><label for="msg">Message (you can edit anything)</label><textarea id="msg"></textarea></div>
+      <div class="send-actions">
+        <a class="btn btn-gold" id="go-outlook" href="#" target="_blank" rel="noopener">Open in Outlook</a>
+        <a class="btn btn-line" id="go-mailto" href="#">Open in my mail app</a>
+        <button class="btn btn-line" id="copy-msg" type="button">Copy message</button>
+      </div>
+      <div class="send-ok" id="send-ok" role="status"></div>
+      <p class="send-note">Outlook opens a new message in your Microsoft 365 account, ready to send. Nothing goes out until you press Send there. Only send what the client is allowed to see. Deal details and addresses go through the NCNDA first, not through this page.</p>
+    </div>
+
+    <div class="send-card">
+      <details class="how">
+        <summary>How do I add or change a file?</summary>
+        <ol>
+          <li>Upload the file to your Centum folder in OneDrive.</li>
+          <li>Click the three dots next to it, then <b>Share</b>, then change the setting to <b>Anyone with the link can view</b>, and click <b>Copy link</b>.</li>
+          <li>In GitHub, open <b>library.js</b> in the centumcap-site repository and click the pencil.</li>
+          <li>Type the file's name between the quotes after <b>title</b>, a short description after <b>note</b>, and paste the link after <b>url</b>.</li>
+          <li>Click <b>Commit changes</b>. The page updates in about a minute.</li>
+        </ol>
+      </details>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-row">
+      <div class="f-brand"><span>Centum Capital</span></div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="marketplace.html">Deal Board</a>
+        <a href="submit.html">Submit a Deal</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="library.js"></script>
+<script src="app.js"></script>
+<script>
+(function () {
+  var L = window.CC_LIBRARY || {};
+  var files = (L.files || []).filter(function (f) { return f && f.title; });
+  var list = document.getElementById("file-list");
+  var nameEl = document.getElementById("to-name");
+  var emailEl = document.getElementById("to-email");
+  var msgEl = document.getElementById("msg");
+  var okEl = document.getElementById("send-ok");
+  var edited = false;
+  var boxes = [];
+
+  files.forEach(function (f, i) {
+    var ready = !!f.url;
+    var row = document.createElement("label");
+    row.className = "file-item" + (ready ? "" : " off");
+    var cb = document.createElement("input");
+    cb.type = "checkbox"; cb.disabled = !ready; cb.checked = ready && i === 0;
+    var txt = document.createElement("div");
+    var b = document.createElement("b"); b.textContent = f.title;
+    txt.appendChild(b);
+    if (f.note) { var s = document.createElement("span"); s.textContent = f.note; txt.appendChild(s); }
+    if (!ready) { var n = document.createElement("div"); n.className = "need"; n.textContent = "Link needed. See \"How do I add or change a file?\" below."; txt.appendChild(n); }
+    row.appendChild(cb); row.appendChild(txt); list.appendChild(row);
+    boxes.push({ cb: cb, file: f });
+    cb.addEventListener("change", function () { edited = false; build(); });
+  });
+  if (!files.length) { list.textContent = "No files yet. Add them in library.js."; }
+
+  function picked() { return boxes.filter(function (x) { return x.cb.checked; }).map(function (x) { return x.file; }); }
+
+  function body() {
+    var name = nameEl.value.trim();
+    var chosen = picked();
+    var t = (name ? "Hi " + name + "," : "Hi,") + "\n\n";
+    if (!chosen.length) { t += "[Choose a file above and the links appear here.]\n\n"; }
+    else {
+      t += chosen.length > 1 ? "Here are the Centum Capital materials we discussed:\n\n" : "Here is the Centum Capital material we discussed:\n\n";
+      chosen.forEach(function (f) { t += f.title + "\n" + f.url + "\n\n"; });
+    }
+    t += "Let me know what stands out, and tell me what you are looking for so I send you the right opportunities.\n\n";
+    t += "Best,\n" + (L.signature || "Centum Capital");
+    return t;
+  }
+
+  function build() {
+    if (!edited) { msgEl.value = body(); }
+    var to = emailEl.value.trim();
+    var subj = L.subject || "Centum Capital materials";
+    var b = msgEl.value;
+    document.getElementById("go-outlook").href = "https://outlook.office.com/mail/deeplink/compose?to=" + encodeURIComponent(to) + "&subject=" + encodeURIComponent(subj) + "&body=" + encodeURIComponent(b);
+    document.getElementById("go-mailto").href = "mailto:" + encodeURIComponent(to).replace(/%40/g, "@") + "?subject=" + encodeURIComponent(subj) + "&body=" + encodeURIComponent(b);
+  }
+
+  nameEl.addEventListener("input", function () { edited = false; build(); });
+  emailEl.addEventListener("input", build);
+  msgEl.addEventListener("input", function () { edited = true; build(); });
+
+  document.getElementById("copy-msg").addEventListener("click", function () {
+    var done = function () { okEl.textContent = "Message copied."; };
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(msgEl.value).then(done, function () { msgEl.select(); document.execCommand("copy"); done(); }); }
+    else { msgEl.select(); document.execCommand("copy"); done(); }
+  });
+
+  build();
+})();
+</script>
+</body>
+</html>
