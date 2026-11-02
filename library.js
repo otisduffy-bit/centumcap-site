@@ -6,7 +6,7 @@ window.CC_LIBRARY = {
   signature: "Centum Capital\nOduffy@centumcap.com\ncentumcap.com",
 
   files: [
-    { title: "Centum Capital Portfolio", note: "Transactions we have closed and what we do.", url: "https://netorgft6704771-my.sharepoint.com/:b:/g/personal/oduffy_centumcap_com/IQCQE-x72iYdSY3dB0eEfk35AQFkfhKIklDp100tYLGMXyw?e=KGgoGT" },
+    { teaser: "YOUR TEASER TEXT HERE", title: "Centum Capital Portfolio", note: "Transactions we have closed and what we do.", url: "https://netorgft6704771-my.sharepoint.com/:b:/g/personal/oduffy_centumcap_com/IQCQE-x72iYdSY3dB0eEfk35AQFkfhKIklDp100tYLGMXyw?e=KGgoGT" },
     { title: "", note: "", url: "" },
     { title: "", note: "", url: "" }
   ]
