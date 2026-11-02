@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NCNDA | Centum Capital</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap header-row">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Centum Capital mark">
+        <defs>
+          <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E4C877"/><stop offset="1" stop-color="#96762C"/></linearGradient>
+          <linearGradient id="silverGrad" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2F3F6"/><stop offset="1" stop-color="#96A0B2"/></linearGradient>
+        </defs>
+        <polygon points="50,8 50,60 12,92 38,92" fill="url(#goldGrad)"/>
+        <polygon points="50,8 50,60 88,92 62,92" fill="url(#silverGrad)"/>
+        <polygon points="50,8 50,60 62,92 38,92" fill="#0F1B2E"/>
+      </svg>
+      <span class="brand-word">CENTUM <b>CAPITAL</b></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <nav class="primary" id="primaryNav">
+      <a href="index.html#solutions">Capital Solutions</a>
+      <a href="marketplace.html">Deal Board</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="ncnda-root">
+  <section style="padding-top:56px;">
+    <div class="wrap">
+      <p class="eyebrow">Confidentiality &amp; Non-Circumvention</p>
+      <h1 style="font-size:clamp(2rem,4vw,2.8rem); margin:10px 0 28px;">Sign once. See every deal.</h1>
+
+      <div id="draft-banner" class="draft-banner">DRAFT &mdash; wording pending attorney approval. Do not rely on this page for signing until this notice is removed.</div>
+
+      <div id="deal-box" class="deal-box" hidden>
+        <span>You are requesting access to</span>
+        <span class="id" id="deal-id"></span>
+        <button class="btn btn-line" id="deal-copy" style="padding:7px 12px; font-size:.78rem;">Copy Deal ID</button>
+        <span>Enter this Deal ID on the signature form.</span>
+      </div>
+
+      <div class="doc-tabs" role="group" aria-label="Choose agreement">
+        <button class="chip" data-doc="principal" aria-pressed="true">I'm a principal (investor, REIT, buyer)</button>
+        <button class="chip" data-doc="broker" aria-pressed="false">I'm a broker</button>
+      </div>
+
+      <!-- PRINCIPAL -->
+      <article class="doc" id="doc-principal">
+        <h2>Non-Circumvention &amp; Non-Disclosure Agreement</h2>
+        <span class="ver">Principals &middot; Version 1.0</span>
+        <ol>
+          <li><div><b>What this is.</b><p>This agreement lets Centum Capital ("Centum," "we") share confidential opportunities with you so you can evaluate them. It applies to each opportunity we identify to you in writing, by address or description, on a one-page Opportunity Schedule (each, an "Opportunity"). You sign this agreement once. Each Opportunity is added by Schedule.</p></div></li>
+          <li><div><b>What we are protecting.</b><p>You may already know a property exists, or may have seen it before. This agreement does not protect the property itself or facts that are public. It protects what you learn from Centum about the Opportunity: that it is available through Centum, who controls it, how it is structured (for example, an assignment of a purchase contract, an off-market sale, or a limited partner equity raise), the price and terms, and any documents, financials, or data-room materials ("Confidential Information").</p></div></li>
+          <li><div><b>If you already knew.</b><p>If you were actively pursuing the same Opportunity before Centum told you about it, tell us in writing within 3 business days of receiving the Schedule and briefly describe how (for example, a signed letter of intent, a contract, or written communications with the owner). We will note it on the Schedule, and sections 4 and 5 will not apply to that Opportunity. Information that is public, that you already had, or that you develop on your own without using Confidential Information is not Confidential Information.</p></div></li>
+          <li><div><b>Keep it confidential.</b><p>Use Confidential Information only to evaluate, and if you choose to pursue, the Opportunity through Centum. Share it only with your employees, advisors, lenders, and capital partners who need it and who agree to keep it confidential. You are responsible for any breach by them. If the law requires disclosure, give Centum prompt notice where legally permitted.</p></div></li>
+          <li><div><b>Work through Centum.</b><p>For [24] months after the date of the Schedule, you will not, without Centum's written consent, contact the owner, seller, assignor, or lender about the Opportunity, or acquire, finance, or invest in the Opportunity other than through Centum.</p></div></li>
+          <li><div><b>Fees.</b><p>Centum is paid by the seller or sponsor. You owe Centum nothing under this agreement [unless you agree otherwise in writing].</p></div></li>
+          <li><div><b>No promises.</b><p>Centum makes no representation about any Opportunity, and this agreement does not obligate either side to a transaction. [Information about securities offerings, including LP equity, is shared only with persons who confirm they are accredited investors.]</p></div></li>
+          <li><div><b>How long it lasts.</b><p>Your confidentiality obligations last [2] years from the date of each Schedule. On request, you will delete or return Confidential Information, subject to legal and routine backup retention.</p></div></li>
+          <li><div><b>Enforcement.</b><p>Centum may seek an injunction in addition to any other remedy. This agreement is governed by the laws of [State], and disputes go to the courts of [County, State]. It is the entire agreement on this subject and can be changed only in writing.</p></div></li>
+          <li><div><b>Electronic signature.</b><p>By checking the box and typing your name on the signature form, you sign this agreement electronically. You agree this has the same effect as a handwritten signature under the federal E-SIGN Act and applicable state law.</p></div></li>
+        </ol>
+        <div class="sign-box">
+          <p>You are signing as an individual or on behalf of the company you name on the form. Signing takes about a minute and opens in a new tab.</p>
+          <a class="btn btn-gold" id="sign-principal" href="#">Sign the Principal NCNDA</a>
+          <p style="font-size:.84rem;">Already signed? <a href="#" id="book-link" style="color:var(--gold);">Book your call</a></p>
+        </div>
+      </article>
+
+      <!-- BROKER -->
+      <article class="doc" id="doc-broker" hidden>
+        <h2>Broker Non-Circumvention &amp; Non-Disclosure Agreement</h2>
+        <span class="ver">Brokers &middot; Version 1.0</span>
+        <ol>
+          <li><div><b>What this is.</b><p>This agreement lets Centum Capital ("Centum," "we") share confidential opportunities with you as a broker so you can present them to your client. It applies to each opportunity we identify to you in writing, by address or description, on a one-page Opportunity Schedule (each, an "Opportunity"). You sign once. Each Opportunity is added by Schedule.</p></div></li>
+          <li><div><b>Your client comes first.</b><p>You act for a disclosed principal ("your client") whom you name when you sign. Your client must register with Centum and sign Centum's principal NCNDA before you receive Confidential Information about any Opportunity. Send your client the link below to start.</p></div></li>
+          <li><div><b>What we are protecting.</b><p>You may already know a property exists. This agreement does not protect the property itself or public facts. It protects what you learn from Centum about the Opportunity: that it is available through Centum, who controls it, how it is structured, the price and terms, and any documents or data-room materials ("Confidential Information").</p></div></li>
+          <li><div><b>If you or your client already knew.</b><p>If you or your client were actively pursuing the same Opportunity before Centum told you about it, tell us in writing within 3 business days of receiving the Schedule, with a short description of how. We will note it on the Schedule, and sections 5 and 6 will not apply to that Opportunity.</p></div></li>
+          <li><div><b>Keep it confidential.</b><p>Share Confidential Information only with your client and your client's advisors who need it and agree to keep it confidential. Do not share it with any other buyer, broker, or party. You are responsible for any breach by anyone you share it with.</p></div></li>
+          <li><div><b>Work through Centum.</b><p>For [24] months after the date of the Schedule, neither you nor your client may, without Centum's written consent, contact the owner, seller, assignor, or lender about the Opportunity, or acquire, finance, or invest in it other than through Centum.</p></div></li>
+          <li><div><b>Compensation.</b><p>Centum is paid by the seller or sponsor. You are entitled to a fee only if a separate written agreement signed by Centum for that Opportunity says so. Any fee requires that you hold a valid real estate license in the property's state. Without that agreement you are not entitled to a fee.</p></div></li>
+          <li><div><b>Your license.</b><p>You confirm you hold a real estate license in good standing and will give your license number and state on the signature form.</p></div></li>
+          <li><div><b>Direct opportunities.</b><p>Centum may offer some opportunities only directly to principals. Not being shown an opportunity gives you no right to a fee or to introduce it.</p></div></li>
+          <li><div><b>Term and enforcement.</b><p>Confidentiality lasts [2] years from the date of each Schedule. Centum may seek an injunction in addition to any other remedy. This agreement is governed by the laws of [State], and disputes go to the courts of [County, State]. It is the entire agreement on this subject and can be changed only in writing.</p></div></li>
+          <li><div><b>Electronic signature.</b><p>By checking the box and typing your name on the signature form, you sign this agreement electronically, with the same effect as a handwritten signature under the federal E-SIGN Act and applicable state law.</p></div></li>
+        </ol>
+        <div class="sign-box">
+          <p><b>Step 1.</b> Your client registers and signs the principal NCNDA first.</p>
+          <button class="btn btn-line" id="client-link-btn">Copy the link for your client</button>
+          <p><b>Step 2.</b> Then you sign the broker NCNDA, with your client's name and email and your license number.</p>
+          <a class="btn btn-gold" id="sign-broker" href="#">Sign the Broker NCNDA</a>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-row">
+      <div class="f-brand"><span>Centum Capital</span></div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="marketplace.html">Deal Board</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deal Board | Centum Capital</title>
+<meta name="description" content="Off-market assignments, LP equity, notes, and REO in commercial real estate. Posted to registered buyers first, under NCNDA.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-gate="required">
+
+<header>
+  <div class="wrap header-row">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Centum Capital mark">
+        <defs>
+          <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E4C877"/><stop offset="1" stop-color="#96762C"/></linearGradient>
+          <linearGradient id="silverGrad" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2F3F6"/><stop offset="1" stop-color="#96A0B2"/></linearGradient>
+        </defs>
+        <polygon points="50,8 50,60 12,92 38,92" fill="url(#goldGrad)"/>
+        <polygon points="50,8 50,60 88,92 62,92" fill="url(#silverGrad)"/>
+        <polygon points="50,8 50,60 62,92 38,92" fill="#0F1B2E"/>
+      </svg>
+      <span class="brand-word">CENTUM <b>CAPITAL</b></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <nav class="primary" id="primaryNav">
+      <a href="index.html#solutions">Capital Solutions</a>
+      <a href="index.html#sectors">Sectors</a>
+      <a href="marketplace.html">Deal Board</a>
+      <a href="#sell">Submit a Deal</a>
+      <a href="#how">How Access Works</a>
+      <button class="btn btn-gold header-cta" data-open-gate>Register Your Buy Box</button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="mk-hero">
+    <div class="wrap">
+      <p class="eyebrow">The Deal Board</p>
+      <h1>Deals you won't find <em>on the open market.</em></h1>
+      <p class="lede">Assignments. Off-market sales. LP equity. Note sales. REO. Posted here first, to buyers who have told us exactly what they are hunting. Register your buy box, sign one NCNDA, and open the data room.</p>
+      <div class="hero-actions">
+        <button class="btn btn-gold" data-open-gate>Register Your Buy Box</button>
+        <a class="btn btn-line" href="#sell">I Have a Deal to Place</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="board-sec" style="padding-top:24px;">
+    <div class="wrap">
+      <div id="events" class="events" role="group" aria-label="Filter by deal type"></div>
+      <div id="chips" class="chips" role="group" aria-label="Filter by asset type"></div>
+      <div id="deal-list"></div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">How Access Works</p>
+        <h2>Four steps from first look to the principal's desk.</h2>
+        <p>Sellers and assignors trust us with their deals because we control who sees them. That discipline is why the board exists.</p>
+      </div>
+      <div class="process" data-reveal>
+        <div class="process-step">
+          <span class="idx">01</span>
+          <h3>Register</h3>
+          <p>Tell us who you are and your buy box: asset types, price range, markets, and deal types.</p>
+        </div>
+        <div class="process-step">
+          <span class="idx">02</span>
+          <h3>Sign the NCNDA</h3>
+          <p>One short agreement covers every opportunity. Each deal adds a one-page schedule with the address.</p>
+        </div>
+        <div class="process-step">
+          <span class="idx">03</span>
+          <h3>Open the data room</h3>
+          <p>Documents sit in a private folder shared with you by name. No public links.</p>
+        </div>
+        <div class="process-step">
+          <span class="idx">04</span>
+          <h3>Meet the principal</h3>
+          <p>Book time with the person who controls the deal and move to terms.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sell">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">For Owners, Assignors &amp; Brokers</p>
+        <h2>Put your deal in front of the buyers who close.</h2>
+      </div>
+      <div class="duo" data-reveal>
+        <div class="panel">
+          <h3>Owners &amp; assignors</h3>
+          <p>Bring us an assignment, an off-market sale, an LP equity raise, a note, or REO. You stay in control of who sees it.</p>
+          <ul>
+            <li>Your contract price and your minimum stay internal. They are never published.</li>
+            <li>We work to beat your minimum. Seller-paid, success-based fees, agreed up front.</li>
+            <li>Buyers see the opportunity only after they register and sign the NCNDA.</li>
+          </ul>
+          <button class="btn btn-gold" data-open-gate="owner">Submit Your Deal</button>
+        </div>
+        <div class="panel">
+          <h3>Brokers</h3>
+          <p>Bring your buyer. Your client registers first, then you register and sign the broker NCNDA.</p>
+          <ul>
+            <li>Some opportunities are offered to principals only.</li>
+            <li>Fee participation exists only by written agreement with Centum and requires a valid license in the property's state.</li>
+            <li>Brokers see only the deals marked for brokers.</li>
+          </ul>
+          <button class="btn btn-line" data-open-gate="broker">Broker Registration</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-row">
+      <div class="f-brand">
+        <svg width="20" height="20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <polygon points="50,8 50,60 12,92 38,92" fill="url(#goldGrad)"/>
+          <polygon points="50,8 50,60 88,92 62,92" fill="url(#silverGrad)"/>
+          <polygon points="50,8 50,60 62,92 38,92" fill="#0F1B2E"/>
+        </svg>
+        <span>Centum Capital</span>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#solutions">Capital Solutions</a>
+        <a href="marketplace.html">Deal Board</a>
+        <a href="ncnda.html">NCNDA</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+    </div>
+    <p class="footer-disclosure">Opportunities are offered only to registered parties under a signed NCNDA. Terms shown are illustrative and subject to due diligence and counterparty approval. Nothing on this site is an offer to sell, or a solicitation of an offer to buy, any security.</p>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="deals.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
