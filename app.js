@@ -305,4 +305,18 @@
       });
     }
   }
+
+  /* ---------- Submit a deal page ---------- */
+  var submitRoot = document.getElementById("submit-root");
+  if (submitRoot) {
+    var cardBody = document.getElementById("submit-card-body");
+    var start = document.getElementById("submit-start");
+    if (C.embedSubmitDeal && cardBody) {
+      cardBody.innerHTML = '<iframe class="submit-frame" title="Submit a deal" src="' + esc(C.embedSubmitDeal) + '"></iframe>';
+    } else if (start) {
+      start.href = pick(F.submitDeal, "Submit a deal");
+      if (F.submitDeal) { start.target = "_blank"; start.rel = "noopener"; }
+      else { start.textContent = "Email Us Your Deal"; }
+    }
+  }
 })();
