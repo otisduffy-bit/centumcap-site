@@ -113,8 +113,8 @@
       <span class="send-step">Step 3</span>
       <h2>Check the message, then send.</h2>
       <div class="send-modes">
-        <button type="button" class="btn btn-gold" id="style-plain" aria-pressed="true">Plain text</button>
-        <button type="button" class="btn btn-line" id="style-rich" aria-pressed="false">Designed email</button>
+        <button type="button" class="btn btn-gold" id="style-rich" aria-pressed="true">Designed email</button>
+        <button type="button" class="btn btn-line" id="style-plain" aria-pressed="false">Plain text</button>
       </div>
       <div id="plain-box" class="send-field"><label for="msg">Message (you can edit anything)</label><textarea id="msg"></textarea></div>
       <div id="rich-box" hidden>
@@ -214,7 +214,7 @@
     if (!chosen.length) { t += "[Choose a file above and the links appear here.]\n\n"; }
     else {
       t += chosen.length > 1 ? "Here are the Centum Capital materials we discussed:\n\n" : "Here is the Centum Capital material we discussed:\n\n";
-      chosen.forEach(function (f) { t += f.title + "\n" + f.url + "\n\n"; });
+      chosen.forEach(function (f) { t += f.title + "\n" + (f.teaser || f.note ? (f.teaser || f.note) + "\n" : "") + "Open it here: " + f.url + "\n\n"; });
     }
     t += "Let me know what stands out, and tell me what you are looking for so I send you the right opportunities.\n\n";
     t += "Best,\n" + (L.signature || "Centum Capital");
@@ -253,7 +253,7 @@
       if (f.image) { h += '<tr><td style="padding:0;"><a href="' + esc(f.url) + '"><img src="' + esc(abs(f.image)) + '" alt="' + esc(f.title) + '" width="542" style="display:block;width:100%;max-width:542px;height:auto;border:0;"></a></td></tr>'; }
       h += '<tr><td style="padding:18px 20px;border-top:' + (f.image ? '3px solid #D3B45F' : '3px solid #D3B45F') + ';">' +
         '<div style="' + G + 'font-size:20px;line-height:1.25;color:#0F1B2E;">' + esc(f.title) + '</div>' +
-        (f.note ? '<div style="' + F + 'font-size:14px;line-height:1.5;color:#5B6577;padding-top:6px;">' + esc(f.note) + '</div>' : '') +
+        ((f.teaser || f.note) ? '<div style="' + F + 'font-size:15px;line-height:1.55;color:#3A465C;padding-top:8px;">' + esc(f.teaser || f.note).replace(/\n/g, "<br>") + '</div>' : '') +
         '<div style="padding-top:14px;"><a href="' + esc(f.url) + '" style="display:inline-block;padding:12px 26px;background:#D3B45F;color:#0B1220;' + F + 'font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;text-decoration:none;">View ' + esc(f.title) + '</a></div>' +
         '</td></tr></table></td></tr>';
     });
@@ -359,7 +359,7 @@
   document.getElementById("copy-msg-many").addEventListener("click", function () { copy(msgEl.value, "Message copied."); });
   document.getElementById("copy-emails").addEventListener("click", function () { copy(emails.join("; "), emails.length + " addresses copied."); });
 
-  build();
+  setStyle("rich");
 })();
 </script>
 </body>
