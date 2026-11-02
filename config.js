@@ -3,7 +3,7 @@ window.CC_CONFIG = {
   dealDeskEmail: "Oduffy@centumcap.com",
 
   forms: {
-    registration: "",
+    registration: "https://forms.cloud.microsoft/r/2ynjms9Xe6",
     broker: "",
     ncndaPrincipal: "",
     ncndaBroker: "",
