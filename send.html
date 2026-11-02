@@ -121,11 +121,11 @@
         <label class="rich-label">This is how it will look. You can click in it and edit the words before you copy.</label>
         <div class="rich-preview" id="rich" contenteditable="true"></div>
         <div class="send-actions"><button class="btn btn-gold" id="copy-rich" type="button">1. Copy designed email</button></div>
-        <p class="send-note">Then click <b>Open in Outlook</b> below (2), click in the body of the new message, and press <b>Ctrl + V</b> to paste (3). The design, the buttons and the links come with it.</p>
+        <p class="send-note">Then click <b>Open in Outlook (desktop)</b> below (2), click in the body of the new message, and press <b>Ctrl + V</b> to paste (3). The design, the buttons and the links come with it.</p>
       </div>
       <div class="send-actions" id="actions-one">
-        <a class="btn btn-gold" id="go-outlook" href="#" target="_blank" rel="noopener">Open in Outlook</a>
-        <a class="btn btn-line" id="go-mailto" href="#">Open in my mail app</a>
+        <a class="btn btn-gold" id="go-mailto" href="#">Open in Outlook (desktop)</a>
+        <a class="btn btn-line" id="go-outlook" href="#" target="_blank" rel="noopener">Open in Outlook on the web</a>
         <button class="btn btn-line" id="copy-msg" type="button">Copy message</button>
       </div>
       <div id="actions-many" hidden>
@@ -136,7 +136,7 @@
         </div>
       </div>
       <div class="send-ok" id="send-ok" role="status"></div>
-      <p class="send-note">Outlook opens a new message in your Microsoft 365 account, ready to send. Nothing goes out until you press Send there. Only send what the recipients are allowed to see. Deal details and addresses go only to buyers who have registered and signed the NCNDA. For a long list or marketing email, use HubSpot so each message has an unsubscribe link.</p>
+      <p class="send-note">The desktop button opens a new message in the Outlook app on this computer, ready to send. Nothing goes out until you press Send there. Only send what the recipients are allowed to see. Deal details and addresses go only to buyers who have registered and signed the NCNDA. For a long list or marketing email, use HubSpot so each message has an unsubscribe link.</p>
     </div>
 
     <div class="send-card">
@@ -289,8 +289,8 @@
       var row = document.createElement("div"); row.className = "group-row";
       var lab = document.createElement("span");
       lab.textContent = (groups > 1 ? "Group " + (g + 1) + " of " + groups + ": " : "") + chunk.length + " recipient" + (chunk.length === 1 ? "" : "s");
-      var a1 = document.createElement("a"); a1.className = "btn btn-gold"; a1.target = "_blank"; a1.rel = "noopener"; a1.href = ln.outlook; a1.textContent = "Open in Outlook";
-      var a2 = document.createElement("a"); a2.className = "btn btn-line"; a2.href = ln.mailto; a2.textContent = "Mail app";
+      var a1 = document.createElement("a"); a1.className = "btn btn-gold"; a1.href = ln.mailto; a1.textContent = "Open in Outlook (desktop)";
+      var a2 = document.createElement("a"); a2.className = "btn btn-line"; a2.target = "_blank"; a2.rel = "noopener"; a2.href = ln.outlook; a2.textContent = "On the web";
       row.appendChild(lab); row.appendChild(a1); row.appendChild(a2); gl.appendChild(row);
     }
   }
