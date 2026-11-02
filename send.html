@@ -32,6 +32,18 @@
   details.how{ margin-top:4px; }
   details.how summary{ cursor:pointer; font-weight:600; }
   details.how ol{ color:var(--muted); font-size:.92rem; line-height:1.7; padding-left:20px; margin:12px 0 0; }
+  .send-wrap [hidden]{ display:none !important; }
+  .rich-label{ display:block; font-size:.82rem; color:var(--muted); margin-bottom:8px; }
+  .rich-preview{ background:#fff; color:#0F1B2E; border:1px solid var(--line); border-radius:6px; padding:14px; overflow:auto; max-height:560px; }
+  .rich-preview:focus{ outline:2px solid var(--gold); outline-offset:1px; }
+  .send-field textarea.short{ min-height:130px; }
+  .send-modes{ display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap; }
+  .group-list{ display:flex; flex-direction:column; gap:8px; }
+  .group-row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; padding:10px 12px; border:1px solid var(--line); border-radius:6px; background:var(--bg); }
+  .group-row span{ flex:1; min-width:140px; font-size:.92rem; }
+  .group-row .btn{ padding:8px 14px; }
+  #actions-many .send-actions{ margin-top:12px; }
+  #actions-many .group-list{ margin-top:16px; }
   @media (max-width:640px){ .send-row{ grid-template-columns:1fr; } .send-card{ padding:20px; } }
 </style>
 </head>
@@ -67,14 +79,27 @@
   <div class="send-wrap">
     <p class="eyebrow">Team Tool</p>
     <h1>Send materials to a client.</h1>
-    <p class="lede">Pick the files, enter who they are going to, and your email opens with the message and links already written. The files live in OneDrive, so nothing gets attached and nothing gets stuck in a size limit.</p>
+    <p class="lede">Pick the files, enter who they are going to (one person or a whole list), and your email opens with the message and links already written. The files live in OneDrive, so nothing gets attached and nothing gets stuck in a size limit.</p>
 
     <div class="send-card">
       <span class="send-step">Step 1</span>
       <h2>Who is it going to?</h2>
-      <div class="send-row">
+      <div class="send-modes">
+        <button type="button" class="btn btn-gold" id="mode-one" aria-pressed="true">One person</button>
+        <button type="button" class="btn btn-line" id="mode-many" aria-pressed="false">Several people</button>
+      </div>
+      <div class="send-row" id="one-box">
         <div class="send-field"><label for="to-name">First name</label><input id="to-name" type="text" autocomplete="off" placeholder="Jordan"></div>
         <div class="send-field"><label for="to-email">Email address</label><input id="to-email" type="email" autocomplete="off" placeholder="jordan@company.com"></div>
+      </div>
+      <div id="many-box" hidden>
+        <div class="send-field"><label for="many-list">Paste the email addresses, one per line or separated by commas. You can paste a whole column straight from Excel.</label><textarea id="many-list" class="short" placeholder="jordan@company.com&#10;sam@fund.com"></textarea></div>
+        <div class="send-actions">
+          <label class="btn btn-line" for="many-file" style="cursor:pointer">Or choose a CSV or text file</label>
+          <input type="file" id="many-file" accept=".csv,.txt,text/csv,text/plain" hidden>
+        </div>
+        <div class="send-ok" id="many-count"></div>
+        <p class="send-note">In an Excel file, use Save As, then CSV, or copy the email column and paste it above. Everyone is added as a hidden copy (BCC), so nobody sees anyone else's address.</p>
       </div>
     </div>
 
@@ -87,14 +112,31 @@
     <div class="send-card">
       <span class="send-step">Step 3</span>
       <h2>Check the message, then send.</h2>
-      <div class="send-field"><label for="msg">Message (you can edit anything)</label><textarea id="msg"></textarea></div>
-      <div class="send-actions">
+      <div class="send-modes">
+        <button type="button" class="btn btn-gold" id="style-plain" aria-pressed="true">Plain text</button>
+        <button type="button" class="btn btn-line" id="style-rich" aria-pressed="false">Designed email</button>
+      </div>
+      <div id="plain-box" class="send-field"><label for="msg">Message (you can edit anything)</label><textarea id="msg"></textarea></div>
+      <div id="rich-box" hidden>
+        <label class="rich-label">This is how it will look. You can click in it and edit the words before you copy.</label>
+        <div class="rich-preview" id="rich" contenteditable="true"></div>
+        <div class="send-actions"><button class="btn btn-gold" id="copy-rich" type="button">1. Copy designed email</button></div>
+        <p class="send-note">Then click <b>Open in Outlook</b> below (2), click in the body of the new message, and press <b>Ctrl + V</b> to paste (3). The design, the buttons and the links come with it.</p>
+      </div>
+      <div class="send-actions" id="actions-one">
         <a class="btn btn-gold" id="go-outlook" href="#" target="_blank" rel="noopener">Open in Outlook</a>
         <a class="btn btn-line" id="go-mailto" href="#">Open in my mail app</a>
         <button class="btn btn-line" id="copy-msg" type="button">Copy message</button>
       </div>
+      <div id="actions-many" hidden>
+        <div class="group-list" id="group-list"></div>
+        <div class="send-actions">
+          <button class="btn btn-line" id="copy-emails" type="button">Copy all email addresses</button>
+          <button class="btn btn-line" id="copy-msg-many" type="button">Copy message</button>
+        </div>
+      </div>
       <div class="send-ok" id="send-ok" role="status"></div>
-      <p class="send-note">Outlook opens a new message in your Microsoft 365 account, ready to send. Nothing goes out until you press Send there. Only send what the client is allowed to see. Deal details and addresses go through the NCNDA first, not through this page.</p>
+      <p class="send-note">Outlook opens a new message in your Microsoft 365 account, ready to send. Nothing goes out until you press Send there. Only send what the recipients are allowed to see. Deal details and addresses go only to buyers who have registered and signed the NCNDA. For a long list or marketing email, use HubSpot so each message has an unsubscribe link.</p>
     </div>
 
     <div class="send-card">
@@ -137,6 +179,12 @@
   var emailEl = document.getElementById("to-email");
   var msgEl = document.getElementById("msg");
   var okEl = document.getElementById("send-ok");
+  var manyEl = document.getElementById("many-list");
+  var BATCH = 30;
+  var mode = "one";
+  var style = "plain";
+  var richEl = document.getElementById("rich");
+  var emails = [];
   var edited = false;
   var boxes = [];
 
@@ -153,7 +201,7 @@
     if (!ready) { var n = document.createElement("div"); n.className = "need"; n.textContent = "Link needed. See \"How do I add or change a file?\" below."; txt.appendChild(n); }
     row.appendChild(cb); row.appendChild(txt); list.appendChild(row);
     boxes.push({ cb: cb, file: f });
-    cb.addEventListener("change", function () { edited = false; build(); });
+    cb.addEventListener("change", function () { edited = false; build(); buildRich(); });
   });
   if (!files.length) { list.textContent = "No files yet. Add them in library.js."; }
 
@@ -162,7 +210,7 @@
   function body() {
     var name = nameEl.value.trim();
     var chosen = picked();
-    var t = (name ? "Hi " + name + "," : "Hi,") + "\n\n";
+    var t = (mode === "one" && name ? "Hi " + name + "," : "Hi,") + "\n\n";
     if (!chosen.length) { t += "[Choose a file above and the links appear here.]\n\n"; }
     else {
       t += chosen.length > 1 ? "Here are the Centum Capital materials we discussed:\n\n" : "Here is the Centum Capital material we discussed:\n\n";
@@ -173,24 +221,143 @@
     return t;
   }
 
-  function build() {
-    if (!edited) { msgEl.value = body(); }
-    var to = emailEl.value.trim();
-    var subj = L.subject || "Centum Capital materials";
-    var b = msgEl.value;
-    document.getElementById("go-outlook").href = "https://outlook.office.com/mail/deeplink/compose?to=" + encodeURIComponent(to) + "&subject=" + encodeURIComponent(subj) + "&body=" + encodeURIComponent(b);
-    document.getElementById("go-mailto").href = "mailto:" + encodeURIComponent(to).replace(/%40/g, "@") + "?subject=" + encodeURIComponent(subj) + "&body=" + encodeURIComponent(b);
+  function parseEmails(txt) {
+    var found = txt.match(/[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}/g) || [];
+    var seen = {}, out = [];
+    found.forEach(function (e) { var k = e.toLowerCase(); if (!seen[k]) { seen[k] = 1; out.push(e); } });
+    return out;
   }
 
-  nameEl.addEventListener("input", function () { edited = false; build(); });
+  function links(to, bcc, subj, b) {
+    var q = "&subject=" + encodeURIComponent(subj) + "&body=" + encodeURIComponent(b);
+    var outlook = "https://outlook.office.com/mail/deeplink/compose?to=" + encodeURIComponent(to) + (bcc ? "&bcc=" + encodeURIComponent(bcc) : "") + q;
+    var mailto = "mailto:" + encodeURIComponent(to).replace(/%40/g, "@") + "?" + (bcc ? "bcc=" + encodeURIComponent(bcc).replace(/%40/g, "@").replace(/%2C/g, ",") + "&" : "") + q.slice(1);
+    return { outlook: outlook, mailto: mailto };
+  }
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function abs(u) { return /^(https?|file):/i.test(u) ? u : "https://centumcap.com/" + String(u).replace(/^\//, ""); }
+
+  function richHtml() {
+    var name = nameEl.value.trim();
+    var chosen = picked();
+    var F = "font-family:Arial,Helvetica,sans-serif;";
+    var G = "font-family:Georgia,'Times New Roman',serif;";
+    var h = '<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;border-collapse:collapse;background:#ffffff;border:1px solid #DCDFE6;">';
+    h += '<tr><td style="background:#0F1B2E;padding:20px 28px;border-bottom:3px solid #D3B45F;' + G + 'font-size:22px;letter-spacing:2px;color:#F4F5F7;">CENTUM <span style="color:#D3B45F;font-weight:bold;">CAPITAL</span></td></tr>';
+    h += '<tr><td style="padding:26px 28px 6px;' + F + 'font-size:15px;line-height:1.6;color:#1B2740;">' + (mode === "one" && name ? "Hi " + esc(name) + "," : "Hi,") + '<br><br>' +
+      (chosen.length > 1 ? "Here are the Centum Capital materials we discussed:" : "Here is the Centum Capital material we discussed:") + '</td></tr>';
+    if (!chosen.length) { h += '<tr><td style="padding:10px 28px;' + F + 'font-size:14px;color:#6B7487;">[Choose a file above and it appears here.]</td></tr>'; }
+    chosen.forEach(function (f) {
+      h += '<tr><td style="padding:14px 28px 6px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border:1px solid #DCDFE6;">';
+      if (f.image) { h += '<tr><td style="padding:0;"><a href="' + esc(f.url) + '"><img src="' + esc(abs(f.image)) + '" alt="' + esc(f.title) + '" width="542" style="display:block;width:100%;max-width:542px;height:auto;border:0;"></a></td></tr>'; }
+      h += '<tr><td style="padding:18px 20px;border-top:' + (f.image ? '3px solid #D3B45F' : '3px solid #D3B45F') + ';">' +
+        '<div style="' + G + 'font-size:20px;line-height:1.25;color:#0F1B2E;">' + esc(f.title) + '</div>' +
+        (f.note ? '<div style="' + F + 'font-size:14px;line-height:1.5;color:#5B6577;padding-top:6px;">' + esc(f.note) + '</div>' : '') +
+        '<div style="padding-top:14px;"><a href="' + esc(f.url) + '" style="display:inline-block;padding:12px 26px;background:#D3B45F;color:#0B1220;' + F + 'font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;text-decoration:none;">View ' + esc(f.title) + '</a></div>' +
+        '</td></tr></table></td></tr>';
+    });
+    var sig = String(L.signature || "Centum Capital").split("\n").map(esc).join("<br>");
+    h += '<tr><td style="padding:18px 28px 26px;' + F + 'font-size:15px;line-height:1.6;color:#1B2740;">Let me know what stands out, and tell me what you are looking for so I send you the right opportunities.<br><br>Best,<br>' + sig + '</td></tr>';
+    h += '</table>';
+    return h;
+  }
+
+  function buildRich() { if (style === "rich") { richEl.innerHTML = richHtml(); } }
+
+  function build() {
+    if (!edited) { msgEl.value = body(); }
+    var subj = L.subject || "Centum Capital materials";
+    var b = style === "rich" ? "" : msgEl.value;
+    if (mode === "one") {
+      var l = links(emailEl.value.trim(), "", subj, b);
+      document.getElementById("go-outlook").href = l.outlook;
+      document.getElementById("go-mailto").href = l.mailto;
+      return;
+    }
+    emails = parseEmails(manyEl.value);
+    var groups = Math.ceil(emails.length / BATCH);
+    document.getElementById("many-count").textContent = emails.length
+      ? emails.length + " email address" + (emails.length === 1 ? "" : "es") + " found" + (groups > 1 ? ", sent in " + groups + " groups of up to " + BATCH + "." : ".")
+      : "";
+    var gl = document.getElementById("group-list");
+    gl.textContent = "";
+    var desk = (window.CC_CONFIG && window.CC_CONFIG.dealDeskEmail) || "";
+    for (var g = 0; g < groups; g++) {
+      var chunk = emails.slice(g * BATCH, (g + 1) * BATCH);
+      var ln = links(desk, chunk.join(","), subj, b);
+      var row = document.createElement("div"); row.className = "group-row";
+      var lab = document.createElement("span");
+      lab.textContent = (groups > 1 ? "Group " + (g + 1) + " of " + groups + ": " : "") + chunk.length + " recipient" + (chunk.length === 1 ? "" : "s");
+      var a1 = document.createElement("a"); a1.className = "btn btn-gold"; a1.target = "_blank"; a1.rel = "noopener"; a1.href = ln.outlook; a1.textContent = "Open in Outlook";
+      var a2 = document.createElement("a"); a2.className = "btn btn-line"; a2.href = ln.mailto; a2.textContent = "Mail app";
+      row.appendChild(lab); row.appendChild(a1); row.appendChild(a2); gl.appendChild(row);
+    }
+  }
+
+  function copy(text, msg) {
+    var done = function () { okEl.textContent = msg; };
+    var fallback = function () { var t = document.createElement("textarea"); t.value = text; document.body.appendChild(t); t.select(); document.execCommand("copy"); t.remove(); done(); };
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done, fallback); } else { fallback(); }
+  }
+
+  function setMode(m) {
+    mode = m; edited = false; okEl.textContent = "";
+    document.getElementById("one-box").hidden = m !== "one";
+    document.getElementById("many-box").hidden = m !== "many";
+    document.getElementById("actions-one").hidden = m !== "one";
+    document.getElementById("actions-many").hidden = m !== "many";
+    [["mode-one", "one"], ["mode-many", "many"]].forEach(function (p) {
+      var el = document.getElementById(p[0]);
+      el.setAttribute("aria-pressed", p[1] === m);
+      el.className = "btn " + (p[1] === m ? "btn-gold" : "btn-line");
+    });
+    build();
+  }
+
+  function setStyle(s) {
+    style = s; okEl.textContent = "";
+    document.getElementById("plain-box").hidden = s !== "plain";
+    document.getElementById("rich-box").hidden = s !== "rich";
+    document.getElementById("copy-msg").hidden = s !== "plain";
+    document.getElementById("copy-msg-many").hidden = s !== "plain";
+    [["style-plain", "plain"], ["style-rich", "rich"]].forEach(function (p) {
+      var el = document.getElementById(p[0]);
+      el.setAttribute("aria-pressed", p[1] === s);
+      el.className = "btn " + (p[1] === s ? "btn-gold" : "btn-line");
+    });
+    buildRich(); build();
+  }
+
+  document.getElementById("style-plain").addEventListener("click", function () { setStyle("plain"); });
+  document.getElementById("style-rich").addEventListener("click", function () { setStyle("rich"); });
+  document.getElementById("copy-rich").addEventListener("click", function () {
+    var sel = window.getSelection(), r = document.createRange();
+    r.selectNodeContents(richEl); sel.removeAllRanges(); sel.addRange(r);
+    var ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) {}
+    sel.removeAllRanges();
+    okEl.textContent = ok ? "Designed email copied. Now open Outlook and paste it into the message." : "Could not copy. Click inside the preview, press Ctrl + A, then Ctrl + C.";
+  });
+
+  document.getElementById("mode-one").addEventListener("click", function () { setMode("one"); });
+  document.getElementById("mode-many").addEventListener("click", function () { setMode("many"); });
+  manyEl.addEventListener("input", build);
+  document.getElementById("many-file").addEventListener("change", function () {
+    var f = this.files && this.files[0];
+    if (!f) return;
+    var r = new FileReader();
+    r.onload = function () { manyEl.value = (manyEl.value ? manyEl.value + "\n" : "") + r.result; build(); };
+    r.readAsText(f);
+  });
+
+  nameEl.addEventListener("input", function () { edited = false; build(); buildRich(); });
   emailEl.addEventListener("input", build);
   msgEl.addEventListener("input", function () { edited = true; build(); });
 
-  document.getElementById("copy-msg").addEventListener("click", function () {
-    var done = function () { okEl.textContent = "Message copied."; };
-    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(msgEl.value).then(done, function () { msgEl.select(); document.execCommand("copy"); done(); }); }
-    else { msgEl.select(); document.execCommand("copy"); done(); }
-  });
+  document.getElementById("copy-msg").addEventListener("click", function () { copy(msgEl.value, "Message copied."); });
+  document.getElementById("copy-msg-many").addEventListener("click", function () { copy(msgEl.value, "Message copied."); });
+  document.getElementById("copy-emails").addEventListener("click", function () { copy(emails.join("; "), emails.length + " addresses copied."); });
 
   build();
 })();
