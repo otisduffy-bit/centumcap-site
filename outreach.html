@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Hiring Outreach | Centum Capital</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .send-wrap{ max-width:940px; margin:0 auto; padding:56px 16px 72px; }
+  .send-wrap h1{ font-size:clamp(1.8rem,4vw,2.5rem); margin:6px 0 10px; }
+  .send-wrap .lede{ color:var(--muted); max-width:64ch; margin:0 0 28px; }
+  .send-card{ background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:26px; box-shadow:var(--shadow); margin-bottom:18px; }
+  .send-card h2{ font-size:1.15rem; margin:0 0 14px; }
+  .send-step{ display:inline-block; font:600 .72rem/1 var(--mono, ui-monospace, monospace); letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+  .send-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px; }
+  .send-field{ display:flex; flex-direction:column; gap:6px; }
+  .send-field label{ font-size:.82rem; color:var(--muted); }
+  .send-field input, .send-field textarea, .send-field select{ font:inherit; color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:11px 12px; width:100%; box-sizing:border-box; }
+  .send-field textarea{ min-height:300px; line-height:1.5; resize:vertical; }
+  .send-field textarea.short{ min-height:70px; }
+  .send-field input:focus, .send-field textarea:focus, .send-field select:focus{ outline:2px solid var(--gold); outline-offset:1px; }
+  .send-actions{ display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+  .send-note{ color:var(--muted); font-size:.86rem; margin:14px 0 0; max-width:66ch; }
+  .send-ok{ color:var(--gold); font-size:.88rem; min-height:1.2em; margin-top:10px; }
+  .send-warn{ color:#B3402A; font-size:.88rem; min-height:1.2em; margin-top:10px; }
+  .send-wrap [hidden]{ display:none !important; }
+  details.how{ margin-top:4px; }
+  details.how summary{ cursor:pointer; font-weight:600; }
+  details.how ol, details.how ul{ color:var(--muted); font-size:.92rem; line-height:1.7; padding-left:20px; margin:12px 0 0; }
+  .stats{ display:flex; flex-wrap:wrap; gap:8px; margin:0 0 16px; }
+  .chip{ display:inline-block; font-size:.78rem; padding:4px 10px; border-radius:999px; border:1px solid var(--line); color:var(--muted); background:var(--bg); }
+  .chip.s-approved{ color:var(--gold); border-color:var(--gold); }
+  .chip.s-sent{ color:var(--ink); border-color:var(--ink); }
+  .chip.s-dnc{ color:#B3402A; border-color:#B3402A; }
+  .pros{ display:flex; flex-direction:column; gap:10px; }
+  .pro{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; padding:12px 14px; border:1px solid var(--line); border-radius:6px; background:var(--bg); }
+  .pro .who{ flex:1; min-width:200px; }
+  .pro .who b{ display:block; }
+  .pro .who span{ color:var(--muted); font-size:.86rem; }
+  .pro .btn{ padding:8px 14px; font-size:.8rem; }
+  .check{ display:flex; gap:10px; align-items:flex-start; margin:10px 0; font-size:.92rem; }
+  .check input{ margin-top:4px; accent-color:var(--gold); }
+  .btn[aria-disabled="true"]{ opacity:.45; pointer-events:none; }
+  @media (max-width:640px){ .send-row{ grid-template-columns:1fr; } .send-card{ padding:20px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-row">
+    <a class="brand" href="index.html">
+      <svg class="brand-mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Centum Capital mark">
+        <defs>
+          <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E4C877"/><stop offset="1" stop-color="#96762C"/></linearGradient>
+          <linearGradient id="silverGrad" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2F3F6"/><stop offset="1" stop-color="#96A0B2"/></linearGradient>
+        </defs>
+        <polygon points="50,8 50,60 12,92 38,92" fill="url(#goldGrad)"/>
+        <polygon points="50,8 50,60 88,92 62,92" fill="url(#silverGrad)"/>
+        <polygon points="50,8 50,60 62,92 38,92" fill="#0F1B2E"/>
+      </svg>
+      <span class="brand-word">CENTUM <b>CAPITAL</b></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <nav class="primary" id="primaryNav">
+      <a href="index.html#solutions">Capital Solutions</a>
+      <a href="index.html#sectors">Sectors</a>
+      <a href="marketplace.html">Deal Board</a>
+      <a href="submit.html">Submit a Deal</a>
+      <a href="ai-business-operations.html">AI &amp; Business Operations</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="send-wrap">
+    <p class="eyebrow">Team Tool</p>
+    <h1>Hiring-signal outreach.</h1>
+    <p class="lede">When a commercial real estate firm posts a job, that is a sign they need more capacity. Log the company here, get an honest first draft that points to the AI &amp; Business Operations page, review it, and send it yourself from Outlook. Nothing is ever sent automatically, and this page never applies for a job.</p>
+
+    <div class="send-card">
+      <span class="send-step">Step 1 &middot; one time</span>
+      <h2>Who is sending?</h2>
+      <div class="send-row">
+        <div class="send-field"><label for="s-name">Your name</label><input id="s-name" type="text" autocomplete="off"></div>
+        <div class="send-field"><label for="s-title">Your title</label><input id="s-title" type="text" autocomplete="off" placeholder="Principal"></div>
+      </div>
+      <div class="send-row">
+        <div class="send-field"><label for="s-email">Reply-to email (a real, monitored inbox)</label><input id="s-email" type="email" autocomplete="off"></div>
+        <div class="send-field"><label for="s-addr">Centum Capital mailing address (required by the CAN-SPAM Act)</label><input id="s-addr" type="text" autocomplete="off" placeholder="Street, city, state, ZIP"></div>
+      </div>
+      <div class="send-actions"><button class="btn btn-gold" id="s-save" type="button">Save sender details</button></div>
+      <div class="send-ok" id="s-ok" role="status"></div>
+      <p class="send-note">Saved only in this browser. Drafts stay locked until all four fields are filled in. Use a street address or a PO box or mailbox you actually receive mail at.</p>
+    </div>
+
+    <div class="send-card">
+      <span class="send-step">Step 2</span>
+      <h2>Add a firm that is hiring.</h2>
+      <div class="send-row">
+        <div class="send-field"><label for="p-company">Company</label><input id="p-company" type="text" autocomplete="off"></div>
+        <div class="send-field"><label for="p-role">Role they are hiring for</label>
+          <select id="p-role">
+            <option value="bd">Business development / origination</option>
+            <option value="acq">Acquisitions / deal sourcing</option>
+            <option value="uw">Analyst / underwriting</option>
+            <option value="ir">Investor relations / capital markets</option>
+            <option value="ops">Transaction coordinator / operations</option>
+            <option value="crm">Marketing / CRM / relationships</option>
+            <option value="other">Other</option>
+          </select></div>
+      </div>
+      <div class="send-row">
+        <div class="send-field"><label for="p-contact">Hiring leader or decision maker (first and last name)</label><input id="p-contact" type="text" autocomplete="off"></div>
+        <div class="send-field"><label for="p-cemail">Their business email</label><input id="p-cemail" type="email" autocomplete="off" placeholder="Copy it from their website or posting. Do not guess."></div>
+      </div>
+      <div class="send-row">
+        <div class="send-field"><label for="p-url">Link to the job posting</label><input id="p-url" type="url" autocomplete="off" placeholder="https://"></div>
+        <div class="send-field"><label for="p-src">Where you found it</label><input id="p-src" type="text" autocomplete="off" placeholder="Company careers page, LinkedIn search, etc."></div>
+      </div>
+      <div class="send-actions"><button class="btn btn-gold" id="p-add" type="button">Add to the list</button></div>
+      <div class="send-warn" id="p-warn" role="alert"></div>
+    </div>
+
+    <div class="send-card">
+      <span class="send-step">Step 3</span>
+      <h2>Your list.</h2>
+      <div class="stats" id="stats"></div>
+      <div class="pros" id="pros"></div>
+      <div class="send-actions">
+        <button class="btn btn-line" id="exp-csv" type="button">Download list (CSV)</button>
+        <button class="btn btn-line" id="exp-dnc" type="button">Copy do-not-contact emails</button>
+      </div>
+      <div class="send-ok" id="list-ok" role="status"></div>
+    </div>
+
+    <div class="send-card" id="draft-card" hidden>
+      <span class="send-step">Step 4</span>
+      <h2 id="draft-title">Review the draft.</h2>
+      <div class="send-field" style="margin-bottom:14px"><label for="d-subject">Subject</label><input id="d-subject" type="text"></div>
+      <div class="send-field"><label for="d-body">Message (edit anything you like)</label><textarea id="d-body"></textarea></div>
+      <label class="check"><input type="checkbox" id="c1"> <span>I read the whole message and it is accurate. It makes no promises about results and does not pretend to be an applicant.</span></label>
+      <label class="check"><input type="checkbox" id="c2"> <span>The recipient is a business contact at the hiring company, and I got the address from a public business source.</span></label>
+      <label class="check"><input type="checkbox" id="c3"> <span>Approved. I will send this myself.</span></label>
+      <div class="send-actions">
+        <a class="btn btn-gold" id="go-mailto" href="#" aria-disabled="true">Open in Outlook (desktop)</a>
+        <a class="btn btn-line" id="go-web" href="#" target="_blank" rel="noopener" aria-disabled="true">Open in Outlook on the web</a>
+        <button class="btn btn-line" id="d-sent" type="button" disabled>I sent it</button>
+        <button class="btn btn-line" id="d-close" type="button">Close</button>
+      </div>
+      <div class="send-ok" id="d-ok" role="status"></div>
+      <p class="send-note">The buttons stay locked until all three boxes are ticked. They open a new message with the text filled in. Nothing goes out until you press Send in Outlook. Come back and click <b>I sent it</b> so the list stays accurate.</p>
+    </div>
+
+    <div class="send-card">
+      <details class="how">
+        <summary>Rules for this workflow (read once)</summary>
+        <ul>
+          <li><b>One honest message, at most one follow-up.</b> The follow-up unlocks 7 days after you mark the first as sent. Then stop.</li>
+          <li><b>Never apply for a job you do not intend to take.</b> Never use another person's name or an invented identity. Every message says plainly who you are and that you are not applying.</li>
+          <li><b>Find the posting yourself.</b> Search company career pages and job boards in your own browser. Do not run scrapers, because LinkedIn, Indeed and most job boards forbid it. Copy business emails from the company's own website or posting. Never guess or buy lists of addresses.</li>
+          <li><b>Always honor opt-outs.</b> If someone replies "no thanks" or anything similar, click <b>Do not contact</b>. They are blocked from the list from then on. CAN-SPAM requires you to stop within 10 business days; this tool stops you immediately.</li>
+          <li><b>Every message carries your real name, a reply address, your mailing address and an opt-out line.</b> The draft adds them for you. Do not remove them.</li>
+          <li><b>No guarantees.</b> Do not add claims about savings, returns, headcount replaced or experience of the "agents". If you mention experience, it must be the real, documented experience of the people at Centum.</li>
+          <li><b>Send in small numbers.</b> A handful a day from your own mailbox. Before any larger send, check your domain's email authentication (see the audit notes) so your messages do not land in spam.</li>
+          <li><b>Attorney check.</b> Have your attorney review the draft wording once before you use it widely.</li>
+        </ul>
+      </details>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-row">
+      <div class="f-brand"><span>Centum Capital</span></div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="marketplace.html">Deal Board</a>
+        <a href="submit.html">Submit a Deal</a>
+        <a href="ai-business-operations.html">AI &amp; Business Operations</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+(function () {
+  var C = window.CC_CONFIG || {};
+  var KEY = "cc_outreach_v1", CFG = "cc_outreach_cfg_v1";
+  var PAGE = "https://centumcap.com/ai-business-operations.html";
+  var WAIT_DAYS = 7;
+  var ROLE = {
+    bd:    { label: "business development", what: "organizing prospect lists, preparing first drafts of owner and investor outreach for your team to review, and keeping follow-up from slipping" },
+    acq:   { label: "acquisitions", what: "screening inbound opportunities against your criteria and preparing short summaries for your team to review" },
+    uw:    { label: "underwriting and analysis", what: "assembling comparables and first-pass summaries so analysts can spend more of their time on judgment" },
+    ir:    { label: "investor relations and capital markets", what: "preparing investor update drafts, organizing investor preferences and keeping data room materials in order" },
+    ops:   { label: "transaction and operations", what: "checklists, document tracking and status updates across a transaction" },
+    crm:   { label: "marketing and relationship management", what: "cleaning up contact data and showing your team who to follow up with, and when" },
+    other: { label: "this", what: "repetitive research, drafting and follow-up work" }
+  };
+  var STATUS = { draft: "Not drafted", approved: "Approved", sent: "Sent", replied: "Replied", dnc: "Do not contact" };
+
+  var $ = function (id) { return document.getElementById(id); };
+  var cfg = {}, list = [], current = null;
+
+  function load() {
+    try { list = JSON.parse(localStorage.getItem(KEY) || "[]") || []; } catch (e) { list = []; }
+    try { cfg = JSON.parse(localStorage.getItem(CFG) || "{}") || {}; } catch (e) { cfg = {}; }
+  }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(list)); } catch (e) {} }
+  function saveCfg() { try { localStorage.setItem(CFG, JSON.stringify(cfg)); } catch (e) {} }
+  function ready() { return !!(cfg.name && cfg.title && cfg.email && cfg.addr); }
+  function norm(s) { return String(s || "").trim().toLowerCase(); }
+  function uid() { return "p" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+  function firstName(n) { return String(n || "").trim().split(/\s+/)[0] || "there"; }
+
+  // ---- sender details
+  $("s-name").value = ""; load();
+  $("s-name").value = cfg.name || ""; $("s-title").value = cfg.title || "";
+  $("s-email").value = cfg.email || C.dealDeskEmail || ""; $("s-addr").value = cfg.addr || "";
+  $("s-save").addEventListener("click", function () {
+    cfg = { name: $("s-name").value.trim(), title: $("s-title").value.trim(), email: $("s-email").value.trim(), addr: $("s-addr").value.trim() };
+    saveCfg();
+    $("s-ok").textContent = ready() ? "Saved. Drafts are unlocked." : "Saved, but all four fields are needed before drafts unlock.";
+    render();
+  });
+
+  // ---- add a prospect
+  $("p-add").addEventListener("click", function () {
+    var warn = $("p-warn"); warn.textContent = "";
+    var p = {
+      id: uid(), company: $("p-company").value.trim(), role: $("p-role").value,
+      contact: $("p-contact").value.trim(), email: $("p-cemail").value.trim(),
+      url: $("p-url").value.trim(), src: $("p-src").value.trim(),
+      status: "draft", sentAt: null, followups: 0, added: new Date().toISOString()
+    };
+    if (!p.company || !p.contact || !p.email) { warn.textContent = "Company, contact name and email are required."; return; }
+    if (!/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(p.email)) { warn.textContent = "That email address does not look right."; return; }
+    if (!p.url && !p.src) { warn.textContent = "Add the posting link or say where you found it, so the list shows why you are writing."; return; }
+    var dupe = list.filter(function (x) { return norm(x.email) === norm(p.email); })[0];
+    if (dupe) { warn.textContent = dupe.status === "dnc" ? "That person asked not to be contacted. Not added." : "That email is already on the list."; return; }
+    list.unshift(p); save();
+    ["p-company", "p-contact", "p-cemail", "p-url", "p-src"].forEach(function (i) { $(i).value = ""; });
+    render();
+  });
+
+  // ---- list
+  function btn(text, cls, fn) {
+    var b = document.createElement("button"); b.type = "button"; b.className = "btn " + cls; b.textContent = text;
+    b.addEventListener("click", fn); return b;
+  }
+  function daysSince(iso) { return (Date.now() - new Date(iso).getTime()) / 86400000; }
+
+  function render() {
+    var counts = {}; list.forEach(function (p) { counts[p.status] = (counts[p.status] || 0) + 1; });
+    var st = $("stats"); st.textContent = "";
+    Object.keys(STATUS).forEach(function (k) {
+      var c = document.createElement("span"); c.className = "chip s-" + k; c.textContent = STATUS[k] + ": " + (counts[k] || 0); st.appendChild(c);
+    });
+    var box = $("pros"); box.textContent = "";
+    if (!list.length) { var e = document.createElement("p"); e.className = "send-note"; e.textContent = "No firms yet. Add one above."; box.appendChild(e); }
+    list.forEach(function (p) {
+      var row = document.createElement("div"); row.className = "pro";
+      var who = document.createElement("div"); who.className = "who";
+      var b = document.createElement("b"); b.textContent = p.company;
+      var s = document.createElement("span");
+      s.textContent = p.contact + " · " + p.email + " · hiring: " + ROLE[p.role].label + " · " + STATUS[p.status] +
+        (p.sentAt ? " " + new Date(p.sentAt).toLocaleDateString() : "") + (p.followups ? " (+ follow-up)" : "");
+      who.appendChild(b); who.appendChild(s); row.appendChild(who);
+      if (p.url) { var a = document.createElement("a"); a.href = p.url; a.target = "_blank"; a.rel = "noopener"; a.textContent = "Posting"; a.className = "btn btn-line"; a.style.padding = "8px 14px"; a.style.fontSize = ".8rem"; row.appendChild(a); }
+      if (p.status === "draft" || p.status === "approved") {
+        row.appendChild(btn("Write draft", "btn-gold", function () { openDraft(p, false); }));
+      }
+      if (p.status === "sent") {
+        var due = p.followups === 0 && daysSince(p.sentAt) >= WAIT_DAYS;
+        var fu = btn(p.followups ? "Follow-up used" : (due ? "Write follow-up" : "Follow-up in " + Math.max(1, Math.ceil(WAIT_DAYS - daysSince(p.sentAt))) + "d"), "btn-line", function () { openDraft(p, true); });
+        if (!due) fu.disabled = true;
+        row.appendChild(fu);
+        row.appendChild(btn("They replied", "btn-line", function () { p.status = "replied"; save(); render(); }));
+      }
+      if (p.status !== "dnc") {
+        row.appendChild(btn("Do not contact", "btn-line", function () {
+          if (window.confirm("Mark " + p.contact + " as do not contact? You will not be able to write to them again.")) { p.status = "dnc"; save(); if (current === p) closeDraft(); render(); }
+        }));
+      }
+      row.appendChild(btn("Remove", "btn-line", function () {
+        if (p.status === "dnc" && !window.confirm("Removing a do-not-contact entry deletes the record that you must not write to this person. Remove anyway?")) return;
+        list = list.filter(function (x) { return x !== p; }); save(); if (current === p) closeDraft(); render();
+      }));
+      box.appendChild(row);
+    });
+  }
+
+  // ---- draft
+  function build(p, follow) {
+    var r = ROLE[p.role], me = cfg;
+    var subj, body;
+    if (!follow) {
+      subj = "Your " + (p.role === "other" ? "open role" : r.label + " opening") + ": an AI-assisted option to consider";
+      body = "Hi " + firstName(p.contact) + ",\r\n\r\n" +
+        "I saw that " + p.company + " is hiring" + (p.role === "other" ? "" : " for " + r.label) + ". To be clear, I am not applying for the role. I am writing from Centum Capital, a commercial real estate debt and equity firm. We also help CRE firms set up AI-assisted workflows, and a hire and a workflow upgrade can work well together.\r\n\r\n" +
+        "For this kind of work, that can mean " + r.what + ". A person on your team stays in charge of every decision, and the tools take on preparation work. We cannot promise particular results, and what makes sense depends on your systems and process.\r\n\r\n" +
+        "How we approach it: " + PAGE + "\r\n\r\n" +
+        "If a short call would be useful, reply to this email" + (C.meetingUrl ? " or book a time here: " + C.meetingUrl : "") + ".\r\n\r\n" +
+        "Thank you,\r\n" + me.name + "\r\n" + me.title + ", Centum Capital\r\n" + me.email + "\r\n" + me.addr + "\r\n\r\n" +
+        "You are receiving this one-time note because " + p.company + " posted a hiring need" + (p.url ? " (" + p.url + ")" : "") + ". If you would rather not hear from us, reply \"no thanks\" and we will not contact you again.";
+    } else {
+      subj = "Following up: " + (p.role === "other" ? "your open role" : "your " + r.label + " opening");
+      body = "Hi " + firstName(p.contact) + ",\r\n\r\n" +
+        "I wrote last week about AI-assisted workflows that can sit alongside your hiring at " + p.company + ". This is the only follow-up I will send. If it is useful, the overview is here: " + PAGE + "\r\n\r\n" +
+        "Thank you,\r\n" + me.name + "\r\n" + me.title + ", Centum Capital\r\n" + me.email + "\r\n" + me.addr + "\r\n\r\n" +
+        "If you would rather not hear from us, reply \"no thanks\" and we will not contact you again.";
+    }
+    return { subject: subj, body: body };
+  }
+
+  var follow = false;
+  function openDraft(p, isFollow) {
+    var warn = $("list-ok");
+    if (!ready()) { warn.textContent = "Fill in and save the sender details in Step 1 first."; $("s-name").focus(); return; }
+    warn.textContent = "";
+    current = p; follow = isFollow;
+    var d = build(p, isFollow);
+    $("d-subject").value = d.subject; $("d-body").value = d.body;
+    $("c1").checked = $("c2").checked = $("c3").checked = false;
+    $("draft-title").textContent = (isFollow ? "Follow-up to " : "Draft for ") + p.contact + " at " + p.company;
+    $("draft-card").hidden = false; $("d-ok").textContent = "";
+    sync(); $("draft-card").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  function closeDraft() { current = null; $("draft-card").hidden = true; }
+  function links() {
+    var to = encodeURIComponent(current.email), su = $("d-subject").value, bo = $("d-body").value;
+    return {
+      mailto: "mailto:" + current.email + "?subject=" + encodeURIComponent(su) + "&body=" + encodeURIComponent(bo),
+      web: "https://outlook.office.com/mail/deeplink/compose?to=" + to + "&subject=" + encodeURIComponent(su) + "&body=" + encodeURIComponent(bo)
+    };
+  }
+  function sync() {
+    if (!current) return;
+    var ok = $("c1").checked && $("c2").checked && $("c3").checked && current.status !== "dnc";
+    var l = links();
+    [["go-mailto", l.mailto], ["go-web", l.web]].forEach(function (x) {
+      var a = $(x[0]);
+      if (ok) { a.href = x[1]; a.removeAttribute("aria-disabled"); } else { a.href = "#"; a.setAttribute("aria-disabled", "true"); }
+    });
+    $("d-sent").disabled = !ok;
+    if (ok && current.status === "draft") { current.status = "approved"; save(); render(); }
+  }
+  ["c1", "c2", "c3", "d-subject", "d-body"].forEach(function (i) { $(i).addEventListener("input", sync); $(i).addEventListener("change", sync); });
+  ["go-mailto", "go-web"].forEach(function (i) {
+    $(i).addEventListener("click", function (ev) { if ($(i).getAttribute("aria-disabled") === "true") ev.preventDefault(); });
+  });
+  $("d-sent").addEventListener("click", function () {
+    if (!current) return;
+    if (follow) { current.followups = 1; } else { current.status = "sent"; current.sentAt = new Date().toISOString(); }
+    save(); $("d-ok").textContent = "Recorded."; closeDraft(); render();
+  });
+  $("d-close").addEventListener("click", closeDraft);
+
+  // ---- exports
+  function csvCell(v) { v = String(v == null ? "" : v); return /[",\r\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }
+  $("exp-csv").addEventListener("click", function () {
+    var head = ["Company", "Contact", "Email", "Role", "Posting", "Source", "Status", "Sent", "Follow-up used"];
+    var rows = list.map(function (p) { return [p.company, p.contact, p.email, ROLE[p.role].label, p.url, p.src, STATUS[p.status], p.sentAt || "", p.followups ? "yes" : "no"].map(csvCell).join(","); });
+    var blob = new Blob([head.join(",") + "\r\n" + rows.join("\r\n")], { type: "text/csv" });
+    var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "centum-outreach.csv";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  });
+  $("exp-dnc").addEventListener("click", function () {
+    var t = list.filter(function (p) { return p.status === "dnc"; }).map(function (p) { return p.email; }).join("\n");
+    var done = function () { $("list-ok").textContent = t ? "Copied." : "Nobody is marked do not contact yet."; };
+    if (!t) return done();
+    if (navigator.clipboard) navigator.clipboard.writeText(t).then(done, done); else done();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
