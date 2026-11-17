@@ -368,15 +368,20 @@
           <p class="eyebrow">Next Step</p>
           <h2>Your business may be operating below its potential.</h2>
           <p>Let's identify where your team is spending unnecessary time, where business opportunities are being missed, and how AI-powered infrastructure could improve your operations.</p>
-          <div class="cc-actions">
-            <a class="btn btn-gold" href="#inquiry" data-schedule>Schedule an AI Strategy Call</a>
-            <a class="btn btn-line" href="#ai-form" id="assess-link">Request an Operational Assessment</a>
+          <ol class="cc-steps" style="margin-top:26px;">
+            <li><span><b>Tell us about your business.</b> Fill out the short form.</span></li>
+            <li><span><b>Press Send.</b> That is the only button you need.</span></li>
+            <li><span><b>We reply to set up your call.</b> We review your answers, then schedule your AI strategy call or operational assessment.</span></li>
+          </ol>
+          <div class="cc-actions" id="book-now" hidden>
+            <a class="btn btn-line" href="#" data-schedule>Or pick a time now: Schedule an AI Strategy Call</a>
           </div>
         </div>
 
         <div>
           <form class="ai-form" id="ai-form" novalidate>
             <h3>Tell us about your business</h3>
+            <p class="ai-fine">Fill this out and press Send. We'll reply to schedule your AI strategy call or operational assessment.</p>
             <div class="ai-row">
               <div class="ai-fld"><label for="f-name">Full name <span class="req">*</span></label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
               <div class="ai-fld"><label for="f-company">Company <span class="req">*</span></label><input id="f-company" name="company" type="text" autocomplete="organization" required></div>
@@ -431,10 +436,10 @@
             <div class="ai-fld"><label for="f-comments">Additional comments</label><textarea id="f-comments" name="comments"></textarea></div>
             <div class="cc-actions" style="margin-top:4px;">
               <button class="btn btn-gold" type="submit">Send My Inquiry</button>
-              <button class="btn btn-line" type="button" id="ai-copy">Copy my answers</button>
             </div>
             <p class="ai-status" id="ai-status" role="status"></p>
-            <p class="ai-fine">Sending opens an email to our team with your answers filled in. Nothing is sent until you press Send in your email program.</p>
+            <div><button class="btn btn-line" type="button" id="ai-copy" hidden>Email did not open? Copy my answers</button></div>
+            <p class="ai-fine">Pressing Send opens an email to our team with your answers filled in. Nothing goes out until you press Send in your email program.</p>
           </form>
 
           <div id="ai-hosted" hidden>
@@ -486,16 +491,17 @@
     else { a.href = "#inquiry"; }
   });
 
+  if (C.meetingUrl) { document.getElementById("book-now").hidden = false; }
+
   var form = document.getElementById("ai-form");
   var hosted = document.getElementById("ai-hosted");
   var statusEl = document.getElementById("ai-status");
+  var copyBtn = document.getElementById("ai-copy");
 
   /* If a Microsoft Form for this page is added to config.js (forms.aiInquiry), use it instead of the email form. */
   if (F.aiInquiry) {
     form.hidden = true; hosted.hidden = false;
     hosted.querySelector("a").href = F.aiInquiry;
-    document.getElementById("assess-link").href = F.aiInquiry;
-    document.getElementById("assess-link").target = "_blank";
     return;
   }
 
@@ -532,10 +538,11 @@
     var d = collect();
     var subject = "[AI & Business Operations] Inquiry from " + d.company;
     window.location.href = "mailto:" + desk + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(d.body);
-    statusEl.textContent = "Your email program should open with your answers filled in. If nothing opens, choose Copy my answers and email them to " + desk + ".";
+    statusEl.textContent = "Your email program should open with your answers filled in. Press Send there to finish. If nothing opens, use the button below to copy your answers and email them to " + desk + ".";
+    copyBtn.hidden = false;
   });
 
-  document.getElementById("ai-copy").addEventListener("click", function () {
+  copyBtn.addEventListener("click", function () {
     if (!form.reportValidity()) return;
     var text = collect().body;
     var done = function () { statusEl.textContent = "Copied. Paste your answers into an email to " + desk + "."; };
