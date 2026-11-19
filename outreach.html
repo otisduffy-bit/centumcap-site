@@ -110,6 +110,7 @@
             <option value="ir">Investor relations / capital markets</option>
             <option value="ops">Transaction coordinator / operations</option>
             <option value="crm">Marketing / CRM / relationships</option>
+            <option value="frac">Fractional or interim executive support (looking for a partner, not a hire)</option>
             <option value="other">Other</option>
           </select></div>
       </div>
@@ -120,6 +121,10 @@
       <div class="send-row">
         <div class="send-field"><label for="p-url">Link to the job posting</label><input id="p-url" type="url" autocomplete="off" placeholder="https://"></div>
         <div class="send-field"><label for="p-src">Where you found it</label><input id="p-src" type="text" autocomplete="off" placeholder="Company careers page, LinkedIn search, etc."></div>
+      </div>
+      <div class="send-row">
+        <div class="send-field"><label for="p-salary">Salary range shown in the posting (optional, only if they published it)</label><input id="p-salary" type="text" autocomplete="off" placeholder="$75,000 to $200,000"></div>
+        <div class="send-field"><label>&nbsp;</label><label class="check" style="margin:10px 0 0"><input type="checkbox" id="p-pilot" checked> <span>Include the 30-day pilot offer (no upfront fee, paid only on documented revenue during the 30 days)</span></label></div>
       </div>
       <div class="send-actions"><button class="btn btn-gold" id="p-add" type="button">Add to the list</button></div>
       <div class="send-warn" id="p-warn" role="alert"></div>
@@ -148,9 +153,11 @@
       <div class="send-actions">
         <a class="btn btn-gold" id="go-mailto" href="#" aria-disabled="true">Open in Outlook (desktop)</a>
         <a class="btn btn-line" id="go-web" href="#" target="_blank" rel="noopener" aria-disabled="true">Open in Outlook on the web</a>
+        <button class="btn btn-line" id="d-copy" type="button">Copy message</button>
         <button class="btn btn-line" id="d-sent" type="button" disabled>I sent it</button>
         <button class="btn btn-line" id="d-close" type="button">Close</button>
       </div>
+      <div class="send-warn" id="d-len" role="status"></div>
       <div class="send-ok" id="d-ok" role="status"></div>
       <p class="send-note">The buttons stay locked until all three boxes are ticked. They open a new message with the text filled in. Nothing goes out until you press Send in Outlook. Come back and click <b>I sent it</b> so the list stays accurate.</p>
     </div>
@@ -202,6 +209,7 @@
     ir:    { label: "investor relations and capital markets", what: "preparing investor update drafts, organizing investor preferences and keeping data room materials in order" },
     ops:   { label: "transaction and operations", what: "checklists, document tracking and status updates across a transaction" },
     crm:   { label: "marketing and relationship management", what: "cleaning up contact data and showing your team who to follow up with, and when" },
+    frac:  { label: "fractional executive support", what: "business development, research, operations and technology workflows, with people at Centum overseeing the work" },
     other: { label: "this", what: "repetitive research, drafting and follow-up work" }
   };
   var STATUS = { draft: "Not drafted", approved: "Approved", sent: "Sent", replied: "Replied", dnc: "Do not contact" };
@@ -238,6 +246,7 @@
       id: uid(), company: $("p-company").value.trim(), role: $("p-role").value,
       contact: $("p-contact").value.trim(), email: $("p-cemail").value.trim(),
       url: $("p-url").value.trim(), src: $("p-src").value.trim(),
+      salary: $("p-salary").value.trim(), pilot: $("p-pilot").checked,
       status: "draft", sentAt: null, followups: 0, added: new Date().toISOString()
     };
     if (!p.company || !p.contact || !p.email) { warn.textContent = "Company, contact name and email are required."; return; }
@@ -246,7 +255,7 @@
     var dupe = list.filter(function (x) { return norm(x.email) === norm(p.email); })[0];
     if (dupe) { warn.textContent = dupe.status === "dnc" ? "That person asked not to be contacted. Not added." : "That email is already on the list."; return; }
     list.unshift(p); save();
-    ["p-company", "p-contact", "p-cemail", "p-url", "p-src"].forEach(function (i) { $(i).value = ""; });
+    ["p-company", "p-contact", "p-cemail", "p-url", "p-src", "p-salary"].forEach(function (i) { $(i).value = ""; });
     render();
   });
 
@@ -303,13 +312,20 @@
     var subj, body;
     if (!follow) {
       subj = "Your " + (p.role === "other" ? "open role" : r.label + " opening") + ": an AI-assisted option to consider";
-      body = "Hi " + firstName(p.contact) + ",\r\n\r\n" +
-        "I saw that " + p.company + " is hiring" + (p.role === "other" ? "" : " for " + r.label) + ". To be clear, I am not applying for the role. I am writing from Centum Capital, a commercial real estate debt and equity firm. We also help CRE firms set up AI-assisted workflows, and a hire and a workflow upgrade can work well together.\r\n\r\n" +
-        "For this kind of work, that can mean " + r.what + ". A person on your team stays in charge of every decision, and the tools take on preparation work. We cannot promise particular results, and what makes sense depends on your systems and process.\r\n\r\n" +
+      var frac = p.role === "frac";
+      var intro = frac
+        ? "I saw that " + p.company + " is looking for fractional or interim executive support. I am writing from Centum Capital, a commercial real estate debt and equity firm. We also provide AI-enabled operating support for CRE firms, overseen by our principals."
+        : "I saw that " + p.company + " is hiring" + (p.role === "other" ? "" : " for " + r.label) + ". To be clear, I am not applying for the role. I am writing from Centum Capital, a commercial real estate debt and equity firm. We also provide AI-enabled operating support for CRE firms, and a hire and a workflow upgrade can work well together.";
+      var pilot = p.pilot
+        ? "Before committing to " + (frac ? "a full-time hire" : "a hire") + (p.salary ? " (the posting lists " + p.salary + ")" : "") + ", you could start with a 30-day pilot. There is no upfront fee. During those 30 days we are paid only from documented revenue attributable to our work, defined in a written agreement before we start. At day 30 you can stop, or continue on a monthly fee agreed in advance.\r\n\r\n"
+        : "";
+      body = "Hi " + firstName(p.contact) + ",\r\n\r\n" + intro + "\r\n\r\n" +
+        "For this kind of work, that can mean " + r.what + ". A person on your team stays in charge of every decision. We cannot promise particular results, and what makes sense depends on your systems and process.\r\n\r\n" +
+        pilot +
         "How we approach it: " + PAGE + "\r\n\r\n" +
         "If a short call would be useful, reply to this email" + (C.meetingUrl ? " or book a time here: " + C.meetingUrl : "") + ".\r\n\r\n" +
         "Thank you,\r\n" + me.name + "\r\n" + me.title + ", Centum Capital\r\n" + me.email + "\r\n" + me.addr + "\r\n\r\n" +
-        "You are receiving this one-time note because " + p.company + " posted a hiring need" + (p.url ? " (" + p.url + ")" : "") + ". If you would rather not hear from us, reply \"no thanks\" and we will not contact you again.";
+        "You are receiving this one-time note because " + p.company + (frac ? " appears to be looking for fractional executive support" : " posted a hiring need") + (p.url ? " (" + p.url + ")" : "") + ". If you would rather not hear from us, reply \"no thanks\" and we will not contact you again.";
     } else {
       subj = "Following up: " + (p.role === "other" ? "your open role" : "your " + r.label + " opening");
       body = "Hi " + firstName(p.contact) + ",\r\n\r\n" +
@@ -350,6 +366,7 @@
       if (ok) { a.href = x[1]; a.removeAttribute("aria-disabled"); } else { a.href = "#"; a.setAttribute("aria-disabled", "true"); }
     });
     $("d-sent").disabled = !ok;
+    $("d-len").textContent = l.mailto.length > 1900 ? "This message is long. If the desktop button opens a cut-off message, click Copy message and paste it into a new Outlook message, or use the web button." : "";
     if (ok && current.status === "draft") { current.status = "approved"; save(); render(); }
   }
   ["c1", "c2", "c3", "d-subject", "d-body"].forEach(function (i) { $(i).addEventListener("input", sync); $(i).addEventListener("change", sync); });
@@ -362,6 +379,11 @@
     save(); $("d-ok").textContent = "Recorded."; closeDraft(); render();
   });
   $("d-close").addEventListener("click", closeDraft);
+  $("d-copy").addEventListener("click", function () {
+    var t = $("d-body").value;
+    var done = function () { $("d-ok").textContent = "Message copied."; };
+    if (navigator.clipboard) navigator.clipboard.writeText(t).then(done, done); else done();
+  });
 
   // ---- exports
   function csvCell(v) { v = String(v == null ? "" : v); return /[",\r\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }
